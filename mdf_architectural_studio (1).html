@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDF Studio | استوديو التصميم والحلول الخشبية المعمارية</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Alexandria:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'plaster': '#f4ede6',
+                        'gallery': '#ffffff',
+                        'ink': '#000000',
+                        'footer-cream': '#eddbcc',
+                        'reception-navy': '#001060',
+                        'terracotta': '#e5c0a4',
+                        'mdf-amber': '#c68b59',
+                    },
+                    fontFamily: {
+                        sans: ['Alexandria', 'sans-serif'],
+                        serif: ['Amiri', 'serif'],
+                    },
+                    letterSpacing: {
+                        'tracked': '0.15em',
+                        'tight-editorial': '-0.02em',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Architectural Styling according to Basha-Franklin spec */
+        body {
+            background-color: #f4ede6;
+            color: #000000;
+            font-family: 'Alexandria', sans-serif;
+            border-color: #000000;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Architectural hairline borders */
+        .hairline-border {
+            border-color: rgba(0, 0, 0, 0.85);
+        }
+        .hairline-border-cream {
+            border-color: rgba(237, 219, 204, 0.3);
+        }
+
+        /* 0px Border Radius Override across all UI elements */
+        *, ::before, ::after {
+            border-radius: 0px !important;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f4ede6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #000000;
+        }
+
+        /* Modal Transitions */
+        .modal-enter {
+            opacity: 0;
+            transform: scale(0.98);
+        }
+        .modal-enter-active {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 300ms, transform 300ms;
+        }
+
+        /* Interactive Filter Active State */
+        .filter-btn.active {
+            background-color: #000000;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-plaster text-ink min-h-screen flex flex-col justify-between selection:bg-terracotta selection:text-ink">
+
+    <!-- Top White Architectural Masthead -->
+    <header class="sticky top-0 z-50 bg-gallery border-b border-ink px-4 md:px-8 py-4 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            
+            <!-- Left Utility Controls & Language/Contact -->
+            <div class="flex items-center space-x-6 space-x-reverse text-xs tracking-tracked uppercase font-normal">
+                <button onclick="toggleMobileMenu()" class="flex items-center gap-2 hover:opacity-70 transition-opacity">
+                    <i class="fa-solid fa-bars text-sm"></i>
+                    <span class="hidden sm:inline">القائمة</span>
+                </button>
+                <a href="tel:+212600000000" class="hidden md:flex items-center gap-2 hover:opacity-70 transition-opacity border-r border-ink/20 pr-6">
+                    <i class="fa-solid fa-phone text-xs"></i>
+                    <span>+212 600 000 000</span>
+                </a>
+            </div>
+
+            <!-- Center Brand Logo / Wordmark -->
+            <div class="text-center">
+                <a href="#" class="inline-block">
+                    <h1 class="text-xl md:text-2xl font-bold tracking-widest uppercase border-b-2 border-ink pb-0.5">MDF STUDIO</h1>
+                    <p class="text-[9px] tracking-[0.3em] text-ink/70 uppercase mt-0.5">ARCHITECTURAL WOODWORKING</p>
+                </a>
+            </div>
+
+            <!-- Right Direct Quick Action Button -->
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="#calculator" class="hidden sm:inline-block border border-ink px-4 py-2 text-xs uppercase tracking-tracked hover:bg-ink hover:text-gallery transition-all duration-300">
+                    + حاسبة التكلفة
+                </a>
+                <a href="#contact" class="bg-ink text-gallery px-4 py-2 text-xs uppercase tracking-tracked hover:bg-reception-navy transition-all duration-300">
+                    حجز موعد
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Slide-out Mobile/Full Navigation Drawer -->
+    <div id="navDrawer" class="fixed inset-0 bg-plaster z-50 hidden flex-col justify-between p-6 md:p-12 border-b-2 border-ink transition-all duration-500">
+        <div class="flex justify-between items-center border-b border-ink/20 pb-6">
+            <span class="text-xs uppercase tracking-tracked text-ink/60">[ 01 — التنقل المعماري ]</span>
+            <button onclick="toggleMobileMenu()" class="text-xl hover:opacity-70 border border-ink px-3 py-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 my-auto max-w-5xl mx-auto w-full py-8">
+            <div class="space-y-6">
+                <p class="text-xs tracking-tracked uppercase text-ink/50 border-b border-ink/10 pb-2">أقسام الموقع</p>
+                <ul class="space-y-4 font-serif text-2xl md:text-3xl">
+                    <li><a href="#hero" onclick="toggleMobileMenu()" class="hover:pr-4 transition-all duration-300 block hover:text-terracotta">٠١. المعرض المعماري الرئيسي</a></li>
+                    <li><a href="#projects" onclick="toggleMobileMenu()" class="hover:pr-4 transition-all duration-300 block hover:text-terracotta">٠٢. ألبوم الأعمال والكتالوج</a></li>
+                    <li><a href="#calculator" onclick="toggleMobileMenu()" class="hover:pr-4 transition-all duration-300 block hover:text-terracotta">٠٣. حاسبة تكلفة المطابخ</a></li>
+                    <li><a href="#materials" onclick="toggleMobileMenu()" class="hover:pr-4 transition-all duration-300 block hover:text-terracotta">٠٤. المواصفات وخامات MDF</a></li>
+                    <li><a href="#contact" onclick="toggleMobileMenu()" class="hover:pr-4 transition-all duration-300 block hover:text-terracotta">٠٥. طلب استشارة واستلام المقاسات</a></li>
+                </ul>
+            </div>
+            <div class="border-t md:border-t-0 md:border-r border-ink/20 pt-6 md:pt-0 md:pr-8 flex flex-col justify-between">
+                <div>
+                    <p class="text-xs tracking-tracked uppercase text-ink/50 mb-4">استوديو التصميم والتصنيع</p>
+                    <p class="font-serif text-lg leading-relaxed mb-6">
+                        نحن نبتكر مساحات عصرية متكاملة تحول خشب الـ MDF إلى قطع فنية معمارية تتسم بالدقة المتناهية المتوافقة مع أحدث معايير التصميم العالمي.
+                    </p>
+                </div>
+                <div class="text-xs space-y-2 text-ink/70">
+                    <p><i class="fa-solid fa-location-dot ml-2"></i> المنطقة الصناعية، الرباط / الدار البيضاء</p>
+                    <p><i class="fa-solid fa-clock ml-2"></i> الإثنين - السبت: 09:00 ص - 07:00 م</p>
+                    <p><i class="fa-solid fa-envelope ml-2"></i> contact@mdf-studio.ma</p>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-ink/20 pt-4 flex justify-between text-xs tracking-tracked text-ink/60">
+            <span>© 2026 MDF ARCHITECTURAL STUDIO. ALL RIGHTS RESERVED.</span>
+            <span>بناء ومعايير بيئية عالية ISO 9001</span>
+        </div>
+    </div>
+
+    <main class="flex-grow">
+        <!-- Hero Section: Editorial Architecture View -->
+        <section id="hero" class="border-b border-ink">
+            <!-- Full Width Architectural Project Banner -->
+            <div class="relative min-h-[75vh] flex flex-col justify-between bg-black text-gallery p-6 md:p-12 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80" 
+                     alt="MDF Modern Kitchen Architecture" 
+                     class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+
+                <!-- Top Hero Header Annotation -->
+                <div class="relative z-10 flex justify-between items-start text-xs uppercase tracking-tracked border-b border-gallery/30 pb-4">
+                    <span>[ مشروع رقم ARCH-2026 ]</span>
+                    <span>مطابخ وتكسيات MDF عالية الكثافة HDF/MDF</span>
+                </div>
+
+                <!-- Main Hero Copy -->
+                <div class="relative z-10 max-w-4xl my-auto py-12">
+                    <span class="inline-block bg-terracotta text-ink px-3 py-1 text-xs uppercase tracking-tracked mb-4 font-semibold">
+                        هندسة الخشب العصري
+                    </span>
+                    <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl font-normal leading-tight text-gallery mb-6">
+                        صياغة الفخامة المعمارية في المطابخ والديكورات الخشبية المخصصة.
+                    </h2>
+                    <p class="text-gallery/80 text-sm md:text-base max-w-2xl font-light leading-relaxed mb-8">
+                        نصمم وننفذ أرقى المطابخ، غرف الملابس (Dressing)، والتكسيات الجدارية باستخدام أجود أخشاب الـ MDF المقاومة للرطوبة المعالجة بتقنيات CNC ومظاهر Polyurethane Matte & Gloss الحصرية.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#calculator" class="bg-gallery text-ink px-8 py-4 text-xs uppercase tracking-tracked font-semibold hover:bg-terracotta transition-colors duration-300">
+                            + احسب تكلفة مطبخك الآن
+                        </a>
+                        <a href="#projects" class="border border-gallery text-gallery px-8 py-4 text-xs uppercase tracking-tracked hover:bg-gallery hover:text-ink transition-colors duration-300">
+                            استكشف الكتالوج المعماري
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Bottom Metrics Bar -->
+                <div class="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-gallery/20 pt-6 text-xs tracking-tracked">
+                    <div>
+                        <span class="block text-terracotta font-bold text-lg mb-0.5">+12 سنة</span>
+                        <span class="text-gallery/70">خبرة في تشكيل وتصنيع MDF</span>
+                    </div>
+                    <div>
+                        <span class="block text-terracotta font-bold text-lg mb-0.5">100%</span>
+                        <span class="text-gallery/70">MDF مقاوم للرطوبة HMR/HDF</span>
+                    </div>
+                    <div>
+                        <span class="block text-terracotta font-bold text-lg mb-0.5">0.1 mm</span>
+                        <span class="text-gallery/70">دقة القص بتقنيات الـ CNC</span>
+                    </div>
+                    <div>
+                        <span class="block text-terracotta font-bold text-lg mb-0.5">10 سنوات</span>
+                        <span class="text-gallery/70">ضمان شامل على المنتجات</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Editorial Statement Strip -->
+        <section class="border-b border-ink bg-terracotta/20 py-12 px-6 md:px-12">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <span class="text-xs uppercase tracking-tracked text-ink/70 block mb-2">[ فلسفة الاستوديو ]</span>
+                    <h3 class="font-serif text-2xl md:text-3xl leading-snug">
+                        "التصميم المعماري الناجح ليس مجرد شكل جميل، بل هو دقة في الحسابات، جودة في الخامة، واستغلال ذكي لكل سنتيمتر مربع."
+                    </h3>
+                </div>
+                <a href="#contact" class="shrink-0 border border-ink bg-gallery px-6 py-3 text-xs uppercase tracking-tracked hover:bg-ink hover:text-gallery transition-all">
+                    تحدث مع مهندس التصميم
+                </a>
+            </div>
+        </section>
+
+        <!-- Interactive Portfolio Gallery (Asymmetric Architectural Grid) -->
+        <section id="projects" class="py-16 border-b border-ink">
+            <div class="px-6 md:px-12 mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <span class="text-xs uppercase tracking-tracked text-ink/60 block mb-1">[ 02 — الكتالوج والمعرض الشبكي ]</span>
+                    <h3 class="font-serif text-3xl md:text-4xl">معرض المشاريع والأعمال المنجزة</h3>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap gap-2 text-xs uppercase tracking-tracked" id="filterContainer">
+                    <button onclick="filterGallery('all')" class="filter-btn active border border-ink px-4 py-2 hover:bg-ink hover:text-gallery transition-all">الكل</button>
+                    <button onclick="filterGallery('kitchen')" class="filter-btn border border-ink px-4 py-2 hover:bg-ink hover:text-gallery transition-all">مطابخ MDF العصري</button>
+                    <button onclick="filterGallery('dressing')" class="filter-btn border border-ink px-4 py-2 hover:bg-ink hover:text-gallery transition-all">خزائن ودريسنج</button>
+                    <button onclick="filterGallery('cladding')" class="filter-btn border border-ink px-4 py-2 hover:bg-ink hover:text-gallery transition-all">تكسيات جدارية & TV Unit</button>
+                </div>
+            </div>
+
+            <!-- Asymmetric Grid Container -->
+            <div class="grid grid-cols-1 md:grid-cols-12 border-t border-b border-ink divide-y md:divide-y-0 md:divide-x md:divide-x-reverse divide-ink">
+                
+                <!-- Tile 1: Featured Kitchen (Large Span) -->
+                <div class="gallery-item kitchen md:col-span-8 p-6 bg-gallery hover:bg-plaster/50 transition-colors group cursor-pointer" onclick="openLightbox('مطبخ مودرن ملامين خشبي وهاي جلوس', 'تشطيب كامل بأخشاب MDF Hydrofuge المزدوجة مع مفصلات بلوم النمساوية وشفاطات مخفية.', 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80')">
+                    <div class="relative overflow-hidden mb-4 aspect-[16/9]">
+                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Modern MDF Kitchen" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <span class="absolute top-3 right-3 bg-ink text-gallery text-[10px] uppercase tracking-tracked px-2 py-1">
+                            MDF Stratifié & Laqué
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-start border-t border-ink/10 pt-3">
+                        <div>
+                            <span class="text-xs tracking-tracked uppercase text-ink/50 block">مشروع #K-102 — الدار البيضاء</span>
+                            <h4 class="font-serif text-xl mt-1">مطبخ مودرن ملامين خشبي ومطفي Polyurethane</h4>
+                        </div>
+                        <span class="text-xs uppercase tracking-tracked border-b border-ink hover:border-transparent">+ التفاصيل</span>
+                    </div>
+                </div>
+
+                <!-- Tile 2: Dressing Room -->
+                <div class="gallery-item dressing md:col-span-4 p-6 bg-gallery hover:bg-plaster/50 transition-colors group cursor-pointer" onclick="openLightbox('غرفة ملابس زجاجية بإطار MDF', 'تصميم خزائن دريسنج روم مفتوحة ومضاءة بـ LED مخفي واستخدام MDF عالي الكثافة.', 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80')">
+                    <div class="relative overflow-hidden mb-4 aspect-[4/5]">
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80" 
+                             alt="MDF Dressing Room" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <span class="absolute top-3 right-3 bg-ink text-gallery text-[10px] uppercase tracking-tracked px-2 py-1">
+                            Dressing & Closet
+                        </span>
+                    </div>
+                    <div class="border-t border-ink/10 pt-3">
+                        <span class="text-xs tracking-tracked uppercase text-ink/50 block">مشروع #D-044 — الرباط</span>
+                        <h4 class="font-serif text-lg mt-1">خزانة Dressing زجاجية بإطار MDF</h4>
+                    </div>
+                </div>
+
+                <!-- Tile 3: Wall Cladding / TV Panel -->
+                <div class="gallery-item cladding md:col-span-4 p-6 bg-gallery hover:bg-plaster/50 transition-colors group cursor-pointer" onclick="openLightbox('تكسية جدارية شرائح MDF CNC', 'شرائح جدارية ثلاثية الأبعاد بدقة CNC مع لوح شاشة تلفزيون بديكورات رخامية وخشبية.', 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80')">
+                    <div class="relative overflow-hidden mb-4 aspect-square">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80" 
+                             alt="MDF Wall Cladding" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <span class="absolute top-3 right-3 bg-ink text-gallery text-[10px] uppercase tracking-tracked px-2 py-1">
+                            Wall Paneling
+                        </span>
+                    </div>
+                    <div class="border-t border-ink/10 pt-3">
+                        <span class="text-xs tracking-tracked uppercase text-ink/50 block">مشروع #C-208 — طنجة</span>
+                        <h4 class="font-serif text-lg mt-1">تكسيات جدارية شرائح MDF CNC و LED</h4>
+                    </div>
+                </div>
+
+                <!-- Tile 4: Premium Kitchen Matte Finish -->
+                <div class="gallery-item kitchen md:col-span-4 p-6 bg-gallery hover:bg-plaster/50 transition-colors group cursor-pointer" onclick="openLightbox('مطبخ أسود وخشب بلوط طبيعي Plaquage', 'تناغم رائع بين الـ MDF المدهون بالأسود المطفي وقشرة البلوط الطبيعية المقاومة للماء.', 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=800&q=80')">
+                    <div class="relative overflow-hidden mb-4 aspect-square">
+                        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=800&q=80" 
+                             alt="MDF Black & Wood Kitchen" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <span class="absolute top-3 right-3 bg-ink text-gallery text-[10px] uppercase tracking-tracked px-2 py-1">
+                            MDF Plaquage Chêne
+                        </span>
+                    </div>
+                    <div class="border-t border-ink/10 pt-3">
+                        <span class="text-xs tracking-tracked uppercase text-ink/50 block">مشروع #K-305 — مراكش</span>
+                        <h4 class="font-serif text-lg mt-1">مطبخ أسود مطفي وقشرة بلوط طبيعية</h4>
+                    </div>
+                </div>
+
+                <!-- Tile 5: Custom Interior Woodwork -->
+                <div class="gallery-item cladding md:col-span-4 p-6 bg-gallery hover:bg-plaster/50 transition-colors group cursor-pointer" onclick="openLightbox('وحدة مدخل وديكورات MDF مخصصة', 'تصميم وتنفيذ مدخل فيلا بفاصل خشبي مفرغ بدقة CNC وتصميم عصري متكامل.', 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80')">
+                    <div class="relative overflow-hidden mb-4 aspect-square">
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" 
+                             alt="Custom MDF Interior Woodwork" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <span class="absolute top-3 right-3 bg-ink text-gallery text-[10px] uppercase tracking-tracked px-2 py-1">
+                            Custom Woodwork
+                        </span>
+                    </div>
+                    <div class="border-t border-ink/10 pt-3">
+                        <span class="text-xs tracking-tracked uppercase text-ink/50 block">مشروع #W-112 — بوزنيقة</span>
+                        <h4 class="font-serif text-lg mt-1">فاصل خشبي مفرغ وسلسلة رفوف مخفية</h4>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Interactive Cost Calculator Section (MDF Kitchen Cost Calculator) -->
+        <section id="calculator" class="py-16 px-6 md:px-12 bg-gallery border-b border-ink">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-xs uppercase tracking-tracked text-ink/60 block mb-2">[ 03 — الشفافية والتسعير ]</span>
+                    <h3 class="font-serif text-3xl md:text-4xl mb-4">حاسبة تكلفة المطابخ التقديرية</h3>
+                    <p class="text-xs md:text-sm text-ink/70 leading-relaxed">
+                        اختر مواصفات مطبخك، نوع خشب MDF، والإكسسوارات لتحصل على تقدير فوري للتكلفة، مع إكانية إرسال التقرير مباشرة للورشة عبر WhatsApp.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 border border-ink p-6 md:p-8 bg-plaster">
+                    
+                    <!-- Calculator Inputs (Left 7 Cols) -->
+                    <div class="lg:col-span-7 space-y-6">
+                        
+                        <!-- Step 1: Meterage Range Slider -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-xs uppercase tracking-tracked font-semibold">1. الأمتار الطولية للمطبخ (متر طولي):</label>
+                                <span id="meterValue" class="font-serif text-lg font-bold border border-ink bg-gallery px-3 py-1">4.0 متر</span>
+                            </div>
+                            <input type="range" id="meterInput" min="2" max="15" step="0.5" value="4" 
+                                   oninput="updateCalculator()" 
+                                   class="w-full accent-ink h-2 bg-ink/20 cursor-pointer">
+                            <span class="text-[10px] text-ink/60 block mt-1">* تشمل الخزائن السفلية والعلوية معاً.</span>
+                        </div>
+
+                        <!-- Step 2: Wood Finish Option -->
+                        <div>
+                            <label class="text-xs uppercase tracking-tracked font-semibold block mb-3">2. نوع خشب الـ MDF والتشطيب:</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <label class="border border-ink p-3 cursor-pointer bg-gallery hover:bg-terracotta/30 flex flex-col justify-between">
+                                    <input type="radio" name="woodType" value="stratifie" checked onchange="updateCalculator()" class="sr-only">
+                                    <div>
+                                        <span class="block text-xs font-bold uppercase">MDF Stratifié</span>
+                                        <span class="text-[10px] text-ink/70">ملامين مقاوم للخدش والحرارة</span>
+                                    </div>
+                                    <span class="text-xs font-bold mt-2 text-ink/90">2,800 درهم/متر</span>
+                                </label>
+
+                                <label class="border border-ink p-3 cursor-pointer bg-gallery hover:bg-terracotta/30 flex flex-col justify-between">
+                                    <input type="radio" name="woodType" value="laque" onchange="updateCalculator()" class="sr-only">
+                                    <div>
+                                        <span class="block text-xs font-bold uppercase">MDF Laqué Polyurethane</span>
+                                        <span class="text-[10px] text-ink/70">صباغة ملساء لامعة أو مطفأة</span>
+                                    </div>
+                                    <span class="text-xs font-bold mt-2 text-ink/90">3,800 درهم/متر</span>
+                                </label>
+
+                                <label class="border border-ink p-3 cursor-pointer bg-gallery hover:bg-terracotta/30 flex flex-col justify-between">
+                                    <input type="radio" name="woodType" value="plaquage" onchange="updateCalculator()" class="sr-only">
+                                    <div>
+                                        <span class="block text-xs font-bold uppercase">Plaquage Wood Veneer</span>
+                                        <span class="text-[10px] text-ink/70">قشرة خشب طبيعي (بلوط/جوز)</span>
+                                    </div>
+                                    <span class="text-xs font-bold mt-2 text-ink/90">4,900 درهم/متر</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Accessories Quality -->
+                        <div>
+                            <label class="text-xs uppercase tracking-tracked font-semibold block mb-2">3. نوع الإكسسوارات والمفصلات:</label>
+                            <select id="accSelect" onchange="updateCalculator()" class="w-full border border-ink p-3 bg-gallery text-xs uppercase tracking-tracked font-sans focus:outline-none">
+                                <option value="standard">إكسسوارات ستاندرد Soft-Close هيدروليك (شاملة)</option>
+                                <option value="premium">إكسسوارات Blum نمساوية فائقة الجودة (+15%)</option>
+                                <option value="luxury">أنظمة Blum Servo-Drive كهربائية بدون مقابض (+30%)</option>
+                            </select>
+                        </div>
+
+                        <!-- Step 4: Countertop / Quartz Addon -->
+                        <div class="flex items-center space-x-3 space-x-reverse border-t border-ink/10 pt-4">
+                            <input type="checkbox" id="marbleCheck" onchange="updateCalculator()" class="w-4 h-4 accent-ink cursor-pointer">
+                            <label for="marbleCheck" class="text-xs uppercase tracking-tracked cursor-pointer">
+                                إضافة رخام الكوارتز / الجرانيت الصناعي المضاد للبقع (+1,500 درهم/متر)
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <!-- Calculator Summary Box (Right 5 Cols) -->
+                    <div class="lg:col-span-5 border border-ink bg-gallery p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="border-b border-ink/20 pb-4 mb-4">
+                                <span class="text-[10px] uppercase tracking-tracked text-ink/60 block">ملخص التقدير التخميني</span>
+                                <h4 class="font-serif text-2xl">التكلفة التقديرية الإجمالية</h4>
+                            </div>
+
+                            <div class="space-y-3 text-xs tracking-tracked border-b border-ink/10 pb-4 mb-4">
+                                <div class="flex justify-between">
+                                    <span class="text-ink/70">المساحة المحسوبة:</span>
+                                    <span id="summaryMeters" class="font-bold">4.0 متر طولي</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-ink/70">الخامة المحددة:</span>
+                                    <span id="summaryWood" class="font-bold">MDF Stratifié</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-ink/70">الإكسسوارات:</span>
+                                    <span id="summaryAcc" class="font-bold">Soft-Close Standard</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-ink/70">الرخام:</span>
+                                    <span id="summaryMarble" class="font-bold">غير مدرج</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-plaster p-4 border border-ink mb-6 text-center">
+                                <span class="text-[10px] uppercase tracking-tracked text-ink/60 block mb-1">المبلغ التقديري الكلي</span>
+                                <span id="totalPrice" class="font-serif text-3xl font-bold text-reception-navy">11,200 درهم</span>
+                                <span class="text-[9px] text-ink/50 block mt-1">* السعر شامل التصميم والتصنيع والتركيب وضمان 10 سنوات.</span>
+                            </div>
+                        </div>
+
+                        <button onclick="sendCalculatorToWhatsApp()" class="w-full bg-reception-navy text-footer-cream hover:bg-ink py-4 text-xs uppercase tracking-tracked font-semibold transition-all duration-300 flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-base"></i>
+                            إرسال المواصفات إلى واتساب الاستوديو
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Materials, Technical Specifications & CNC Craftsmanship -->
+        <section id="materials" class="py-16 px-6 md:px-12 border-b border-ink">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-ink/20 pb-6">
+                    <div>
+                        <span class="text-xs uppercase tracking-tracked text-ink/60 block mb-1">[ 04 — الجودة والتقنيات ]</span>
+                        <h3 class="font-serif text-3xl md:text-4xl">لماذا نعتمد خشب MDF المعالج معمارياً؟</h3>
+                    </div>
+                    <p class="text-xs text-ink/70 max-w-md">
+                        نستخدم ألياف الخشب عالية الكثافة (HDF/MDF Hydrofuge) المعالجة ضد الرطوبة والحشرات، والمتوافقة مع أعلى معايير السلامة البيئية الصارمة.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Feature 1 -->
+                    <div class="border border-ink p-6 bg-gallery">
+                        <div class="w-10 h-10 border border-ink flex items-center justify-center mb-6 text-ink font-serif text-lg">01</div>
+                        <h4 class="font-serif text-xl mb-3">مقاومة فائقة للرطوبة (MDF Hydrofuge)</h4>
+                        <p class="text-xs text-ink/70 leading-relaxed mb-4">
+                            ألواح MDF خضراء النواة معالجة كيميائياً لمقاومة تسربات المياه والرطوبة العالية داخل المطابخ والحمامات دون أن تتمدد أو تتلف.
+                        </p>
+                        <ul class="text-[11px] space-y-1 text-ink/80 border-t border-ink/10 pt-3">
+                            <li>✓ كثافة تفوق 750 كجم/متر مكعب</li>
+                            <li>✓ مقاومة للفطريات والبكتيريا</li>
+                        </ul>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="border border-ink p-6 bg-gallery">
+                        <div class="w-10 h-10 border border-ink flex items-center justify-center mb-6 text-ink font-serif text-lg">02</div>
+                        <h4 class="font-serif text-xl mb-3">تقطيع حافة حاد بتقنيات CNC & PUR</h4>
+                        <p class="text-xs text-ink/70 leading-relaxed mb-4">
+                            استخدام ماكينات الـ CNC الرقمية لقص دقيق للغاية، مع إغلاق الحواف باستخدام غراء PUR المقاوم للماء والحرارة لمنع التفكك نهائياً.
+                        </p>
+                        <ul class="text-[11px] space-y-1 text-ink/80 border-t border-ink/10 pt-3">
+                            <li>✓ شريط حواف Chants 2mm ألماني</li>
+                            <li>✓ تقاطعات بدون خطوط غراء ظاهرة</li>
+                        </ul>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="border border-ink p-6 bg-gallery">
+                        <div class="w-10 h-10 border border-ink flex items-center justify-center mb-6 text-ink font-serif text-lg">03</div>
+                        <h4 class="font-serif text-xl mb-3">تشطيبات طلاء وتغطية متعددة</h4>
+                        <p class="text-xs text-ink/70 leading-relaxed mb-4">
+                            خيارات غير محدودة من صباغة الـ Polyurethane الغنية بأسطح لامعة High Gloss أو مطفأة Soft Touch المقاومة لبصمات الأصابع.
+                        </p>
+                        <ul class="text-[11px] space-y-1 text-ink/80 border-t border-ink/10 pt-3">
+                            <li>✓ أكثر من 200 لون RAL معتمد</li>
+                            <li>✓ طبقات حماية ضد الأشعة فوق البنفسجية</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Measurement Booking & Contact Form Section -->
+        <section id="contact" class="py-16 px-6 md:px-12 bg-gallery border-b border-ink">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Left Info Section (5 cols) -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs uppercase tracking-tracked text-ink/60 block mb-1">[ 05 — الاستشارة والمقاسات ]</span>
+                    <h3 class="font-serif text-3xl md:text-4xl">احجز موعد أخذ المقاسات في منزلك</h3>
+                    <p class="text-xs md:text-sm text-ink/70 leading-relaxed">
+                        يقوم مهندس متخصص من فريقنا بزيارة موقعكم لمعاينة المساحة، أخذ المقاسات بالليزر بدقة، وتقديم عينات خشب MDF مباشرة لاختيار الأنسب.
+                    </p>
+
+                    <div class="space-y-4 border-t border-b border-ink/20 py-6 my-6 text-xs tracking-tracked">
+                        <div class="flex items-start gap-4">
+                            <i class="fa-solid fa-compass-drafting text-lg mt-1 text-reception-navy"></i>
+                            <div>
+                                <span class="font-bold block">تصميم 3D ثلاثي الأبعاد مجاني</span>
+                                <span class="text-ink/60">نقدم محاكاة واقعية لمطبخك قبل البدء في التصنيع.</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <i class="fa-solid fa-truck-ramp-box text-lg mt-1 text-reception-navy"></i>
+                            <div>
+                                <span class="font-bold block">التوصيل والتركيب بأيدي حرفيين</span>
+                                <span class="text-ink/60">فريق تركيب محترف يضمن نظافة وجودة الإنهاء.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs space-y-2">
+                        <p class="font-bold uppercase tracking-tracked">مقر الاستوديو والورشة:</p>
+                        <p class="text-ink/70">شارع الصناعة الميكانيكية، الحي الصناعي، الرباط - المغرب</p>
+                        <p class="text-ink/70">هاتف: +212 522 000 000 | واتساب: +212 600 000 000</p>
+                    </div>
+                </div>
+
+                <!-- Right Interactive Form (7 cols) -->
+                <div class="lg:col-span-7 border border-ink p-6 md:p-8 bg-plaster">
+                    <form id="appointmentForm" onsubmit="handleAppointmentSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[11px] uppercase tracking-tracked font-semibold block mb-1">الاسم الكامل *</label>
+                                <input type="text" required placeholder="محمد العلوي" class="w-full border border-ink p-3 bg-gallery text-xs focus:outline-none focus:bg-terracotta/10">
+                            </div>
+                            <div>
+                                <label class="text-[11px] uppercase tracking-tracked font-semibold block mb-1">رقم الهاتف *</label>
+                                <input type="tel" required placeholder="0600000000" class="w-full border border-ink p-3 bg-gallery text-xs focus:outline-none focus:bg-terracotta/10">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[11px] uppercase tracking-tracked font-semibold block mb-1">المدينة *</label>
+                                <select required class="w-full border border-ink p-3 bg-gallery text-xs font-sans focus:outline-none">
+                                    <option value="">اختر المدينة</option>
+                                    <option value="الرباط">الرباط / سلا</option>
+                                    <option value="الدار البيضاء">الدار البيضاء</option>
+                                    <option value="طنجة">طنجة</option>
+                                    <option value="مراكش">مراكش</option>
+                                    <option value="فاس">فاس / مكناس</option>
+                                    <option value="أكادير">أكادير</option>
+                                    <option value="مدن أخرى">مدينة أخرى</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-[11px] uppercase tracking-tracked font-semibold block mb-1">نوع المشروع المطلوب *</label>
+                                <select required class="w-full border border-ink p-3 bg-gallery text-xs font-sans focus:outline-none">
+                                    <option value="مطبخ عصري كامل">مطبخ عصري كامل</option>
+                                    <option value="خزانة Dressing">خزانة ملابس Dressing</option>
+                                    <option value="تكسيات جدارية وTV Unit">تكسيات جدارية وTV Unit</option>
+                                    <option value="مشروع تجاري / مكتب">مشروع تجاري / ديكور مكتب</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-[11px] uppercase tracking-tracked font-semibold block mb-1">تفاصيل إضافية أو ملاحظات عن المقاسات</label>
+                            <textarea rows="4" placeholder="اكتب أبعاد المكان أو تفاصيل التصميم المطلوب..." class="w-full border border-ink p-3 bg-gallery text-xs focus:outline-none focus:bg-terracotta/10"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-ink text-gallery hover:bg-reception-navy py-4 text-xs uppercase tracking-tracked font-semibold transition-colors duration-300">
+                            تأكيد طلب حجز موعد المقاسات الاستشاري
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Navy High-Contrast Footer Endcap (Reception Navy #001060) -->
+    <footer class="bg-reception-navy text-footer-cream border-t border-ink">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-16">
+            
+            <!-- Top Footer Newsletter & Statement Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b hairline-border-cream">
+                
+                <!-- Statement Column -->
+                <div class="lg:col-span-7 space-y-4">
+                    <span class="text-xs uppercase tracking-tracked text-footer-cream/60 block">[ النشرة المعمارية ]</span>
+                    <h3 class="font-serif text-2xl md:text-3xl text-footer-cream leading-relaxed">
+                        اشترك للحصول على كتالوج التصاميم الحديثة وأحدث اتجاهات ديكورات خشب الـ MDF.
+                    </h3>
+                </div>
+
+                <!-- Newsletter Input -->
+                <div class="lg:col-span-5 flex flex-col justify-end">
+                    <form onsubmit="handleNewsletter(event)" class="flex border-b border-footer-cream pb-2">
+                        <input type="email" required placeholder="بريدك الإلكتروني..." 
+                               class="bg-transparent w-full text-xs text-footer-cream placeholder-footer-cream/50 focus:outline-none">
+                        <button type="submit" class="text-xs uppercase tracking-tracked hover:opacity-70 px-2">
+                            اشتراك <i class="fa-solid fa-arrow-left mr-2"></i>
+                        </button>
+                    </form>
+                    <span class="text-[10px] text-footer-cream/50 mt-2">نحترم خصوصيتك. يمكنك إلغاء الاشتراك في أي وقت.</span>
+                </div>
+            </div>
+
+            <!-- Footer Links Columns -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 text-xs tracking-tracked border-b hairline-border-cream">
+                <div>
+                    <span class="block text-footer-cream/50 uppercase mb-4">MDF Studio</span>
+                    <ul class="space-y-2">
+                        <li><a href="#hero" class="hover:text-terracotta">الرئيسية</a></li>
+                        <li><a href="#projects" class="hover:text-terracotta">معرض الأعمال</a></li>
+                        <li><a href="#calculator" class="hover:text-terracotta">حاسبة التسعير</a></li>
+                        <li><a href="#materials" class="hover:text-terracotta">مواصفات MDF</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <span class="block text-footer-cream/50 uppercase mb-4">المنتجات والتخصصات</span>
+                    <ul class="space-y-2">
+                        <li><a href="#projects" class="hover:text-terracotta">مطابخ MDF Stratifié</a></li>
+                        <li><a href="#projects" class="hover:text-terracotta">مطابخ MDF Laqué</a></li>
+                        <li><a href="#projects" class="hover:text-terracotta">خزائن الملابس Dressing</a></li>
+                        <li><a href="#projects" class="hover:text-terracotta">تكسيات جدارية CNC</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <span class="block text-footer-cream/50 uppercase mb-4">التواصل والورشة</span>
+                    <ul class="space-y-2">
+                        <li><a href="tel:+212600000000" class="hover:text-terracotta">+212 600 000 000</a></li>
+                        <li><a href="mailto:contact@mdf-studio.ma" class="hover:text-terracotta">contact@mdf-studio.ma</a></li>
+                        <li><span class="text-footer-cream/70">شارع الصناعة، الرباط</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <span class="block text-footer-cream/50 uppercase mb-4">شبكات التواصل</span>
+                    <div class="flex space-x-4 space-x-reverse text-base">
+                        <a href="#" class="hover:text-terracotta"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-terracotta"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-terracotta"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#" class="hover:text-terracotta"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Legal Bar -->
+            <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-[11px] text-footer-cream/60 space-y-4 md:space-y-0">
+                <p>© 2026 MDF ARCHITECTURAL STUDIO — جميع الحقوق محفوظة.</p>
+                <div class="flex space-x-6 space-x-reverse">
+                    <a href="#" class="hover:text-footer-cream">الشروط والأحكام</a>
+                    <a href="#" class="hover:text-footer-cream">سياسة الخصوصية</a>
+                    <a href="#" class="hover:text-footer-cream">معايير الضمان 10 سنوات</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Interactive Lightbox Modal -->
+    <div id="lightboxModal" class="fixed inset-0 bg-ink/90 z-50 hidden items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-plaster max-w-4xl w-full border-2 border-ink p-6 md:p-8 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeLightbox()" class="absolute top-4 left-4 text-ink hover:opacity-70 border border-ink px-3 py-1 text-xs uppercase tracking-tracked bg-gallery">
+                إغلاق [ X ]
+            </button>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                <img id="modalImage" src="" alt="Project Detail" class="w-full h-auto object-cover border border-ink">
+                <div class="flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs uppercase tracking-tracked text-ink/60 block mb-1">[ تفاصيل المشروع المعماري ]</span>
+                        <h3 id="modalTitle" class="font-serif text-2xl mb-4"></h3>
+                        <p id="modalDesc" class="text-xs text-ink/80 leading-relaxed mb-6"></p>
+                    </div>
+                    <div class="space-y-3 border-t border-ink/20 pt-4">
+                        <a id="modalWhatsappBtn" href="#" target="_blank" class="w-full bg-ink text-gallery text-center py-3 text-xs uppercase tracking-tracked block hover:bg-reception-navy transition-colors">
+                            <i class="fa-brands fa-whatsapp ml-2"></i> استفسر عن هذا التصميم بـ WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Toggle Mobile Menu Drawer
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('navDrawer');
+            if (drawer.classList.contains('hidden')) {
+                drawer.classList.remove('hidden');
+                drawer.classList.add('flex');
+            } else {
+                drawer.classList.add('hidden');
+                drawer.classList.remove('flex');
+            }
+        }
+
+        // Filter Portfolio Gallery Grid
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Interactive MDF Cost Calculator Logic
+        function updateCalculator() {
+            const meters = parseFloat(document.getElementById('meterInput').value);
+            document.getElementById('meterValue').innerText = meters.toFixed(1) + ' متر';
+            document.getElementById('summaryMeters').innerText = meters.toFixed(1) + ' متر طولي';
+
+            // Wood type rate selection
+            const woodRadios = document.getElementsByName('woodType');
+            let woodPrice = 2800;
+            let woodName = 'MDF Stratifié';
+
+            for (let radio of woodRadios) {
+                if (radio.checked) {
+                    if (radio.value === 'stratifie') {
+                        woodPrice = 2800;
+                        woodName = 'MDF Stratifié (ملامين)';
+                    } else if (radio.value === 'laque') {
+                        woodPrice = 3800;
+                        woodName = 'MDF Laqué Polyurethane';
+                    } else if (radio.value === 'plaquage') {
+                        woodPrice = 4900;
+                        woodName = 'Plaquage Wood Veneer';
+                    }
+                }
+            }
+            document.getElementById('summaryWood').innerText = woodName;
+
+            // Accessories multiplier
+            const accVal = document.getElementById('accSelect').value;
+            let accMultiplier = 1.0;
+            let accName = 'Soft-Close Standard';
+
+            if (accVal === 'premium') {
+                accMultiplier = 1.15;
+                accName = 'Blum Nō1 نمساوي (+15%)';
+            } else if (accVal === 'luxury') {
+                accMultiplier = 1.30;
+                accName = 'Blum Servo-Drive كهربائي (+30%)';
+            }
+            document.getElementById('summaryAcc').innerText = accName;
+
+            // Quartz / Marble Checkbox
+            const marbleCheck = document.getElementById('marbleCheck').checked;
+            let marbleCost = 0;
+            if (marbleCheck) {
+                marbleCost = meters * 1500;
+                document.getElementById('summaryMarble').innerText = 'رخام كوارتز مدرج';
+            } else {
+                document.getElementById('summaryMarble').innerText = 'غير مدرج';
+            }
+
+            // Calculate Total Cost
+            let subtotal = (meters * woodPrice) * accMultiplier;
+            let grandTotal = subtotal + marbleCost;
+
+            document.getElementById('totalPrice').innerText = grandTotal.toLocaleString('ar-MA') + ' درهم';
+        }
+
+        // Send Calculator Results to WhatsApp
+        function sendCalculatorToWhatsApp() {
+            const meters = document.getElementById('meterInput').value;
+            const wood = document.getElementById('summaryWood').innerText;
+            const acc = document.getElementById('summaryAcc').innerText;
+            const marble = document.getElementById('summaryMarble').innerText;
+            const price = document.getElementById('totalPrice').innerText;
+
+            const text = `مرحباً MDF Studio 👋%0A%0Aأود الاستفسار عن كلفة مطبخ بالمواصفات التالية:%0A- المساحة: ${meters} متر طولي%0A- نوع MDF: ${wood}%0A- الإكسسوارات: ${acc}%0A- الرخام: ${marble}%0A- السعر التقديري بالحاسبة: ${price}%0A%0Aأرجو التواصل معي لتأكيد الموعد والتفاصيل.`;
+            window.open(`https://wa.me/212600000000?text=${text}`, '_blank');
+        }
+
+        // Lightbox Functions
+        function openLightbox(title, desc, imgSrc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('modalImage').src = imgSrc;
+            
+            const waText = encodeURIComponent(`مرحباً MDF Studio، أود الاستفسار عن تفاصيل المشروع التالي: ${title}`);
+            document.getElementById('modalWhatsappBtn').href = `https://wa.me/212600000000?text=${waText}`;
+
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Handle Appointment Form
+        function handleAppointmentSubmit(e) {
+            e.preventDefault();
+            alert('شكراً لك! تم استلام طلب موعد المقاسات بنجاح. سيقوم فريق مهندسي MDF Studio بالتواصل معك خلال 24 ساعة.');
+            e.target.reset();
+        }
+
+        // Handle Newsletter
+        function handleNewsletter(e) {
+            e.preventDefault();
+            alert('تم اشتراكك في النشرة المعمارية لـ MDF Studio بنجاح!');
+            e.target.reset();
+        }
+
+        // Initial Calculation on Load
+        window.onload = function() {
+            updateCalculator();
+        }
+    </script>
+</body>
+</html>
