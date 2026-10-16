@@ -1,426 +1,329 @@
-
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MDF Atelier | Meubles sur mesure</title>
-<style>
-:root {
-  --cream: #f4ede6;
-  --white: #fffdf9;
-  --navy: #071a29;
-  --wood: #bd9168;
-  --ink: #111b25;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--white);
-  color: var(--ink);
-  font-family: Arial, sans-serif;
-}
-a { color: inherit; text-decoration: none; }
-
-header {
-  min-height: 76px;
-  padding: 18px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border-bottom: 1px solid #eee;
-}
-.logo {
-  font: 32px Georgia, serif;
-  letter-spacing: 3px;
-}
-.logo small {
-  display: block;
-  font: 10px Arial, sans-serif;
-  letter-spacing: 1px;
-}
-nav {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  font-size: 11px;
-  text-transform: uppercase;
-}
-nav a:hover { color: var(--wood); }
-nav .devis {
-  background: var(--navy);
-  color: white;
-  padding: 15px 18px;
-}
-
-.hero {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  min-height: 520px;
-  background: var(--cream);
-}
-.hero-text {
-  padding: 70px 10%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-.eyebrow {
-  color: #9b714d;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-h1, h2, h3 { font-family: Georgia, serif; font-weight: normal; }
-h1 { font-size: clamp(40px, 5vw, 64px); line-height: 1.05; }
-.hero p, .intro p {
-  color: #625d57;
-  font-size: 14px;
-  line-height: 1.9;
-}
-.hero-image {
-  min-height: 450px;
-  background:
-    url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=85")
-    center/cover;
-}
-.button {
-  display: inline-block;
-  background: var(--navy);
-  color: white;
-  padding: 16px 22px;
-  margin-top: 15px;
-  font-size: 11px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  border: 1px solid var(--navy);
-  cursor: pointer;
-}
-.button:hover { background: var(--wood); }
-
-.benefits {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
-  padding: 35px 6%;
-  background: #faf6f0;
-}
-.benefits article { border-right: 1px solid #ddd0c2; padding-right: 15px; }
-.benefits article:last-child { border: none; }
-.benefits h3 {
-  font: 12px Arial, sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-.benefits p { font-size: 12px; line-height: 1.7; color: #625d57; }
-
-section.content { padding: 80px 6%; }
-.section-heading { margin-bottom: 35px; }
-.section-heading h2 { font-size: 42px; margin-bottom: 12px; }
-.section-heading p { color: #625d57; line-height: 1.8; max-width: 550px; }
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-}
-.project {
-  height: 270px;
-  position: relative;
-  overflow: hidden;
-  background: #ddd;
-}
-.project img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .4s;
-}
-.project:hover img { transform: scale(1.05); }
-.project span {
-  position: absolute;
-  left: 18px;
-  bottom: 18px;
-  color: white;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 8px black;
-}
-
-.about {
-  background: var(--cream);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
-  align-items: center;
-}
-.about img { width: 100%; height: 400px; object-fit: cover; }
-.about p { line-height: 1.9; color: #625d57; font-size: 14px; }
-
-.steps {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  margin-top: 35px;
-}
-.steps article { border-top: 1px solid #222; padding-top: 18px; }
-.steps strong { color: var(--wood); font: 32px Georgia, serif; }
-.steps p { font-size: 13px; line-height: 1.8; color: #625d57; }
-
-.contact {
-  background: var(--navy);
-  color: white;
-  padding: 75px 8%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 55px;
-}
-.contact p { line-height: 1.8; color: #d0d5d9; }
-form { display: grid; gap: 15px; }
-input, select, textarea {
-  width: 100%;
-  padding: 15px;
-  color: white;
-  background: transparent;
-  border: 1px solid #62707b;
-  font: 14px Arial, sans-serif;
-}
-input::placeholder, textarea::placeholder { color: #cbd0d4; }
-select option { color: black; }
-textarea { min-height: 110px; resize: vertical; }
-form button {
-  padding: 16px;
-  background: var(--cream);
-  color: var(--navy);
-  border: none;
-  cursor: pointer;
-}
-footer {
-  padding: 25px 6%;
-  background: #05131e;
-  color: #ddd;
-  font-size: 12px;
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-@media(max-width: 800px) {
-  header { align-items: flex-start; flex-direction: column; gap: 18px; }
-  nav { flex-wrap: wrap; gap: 14px; }
-  .hero, .about, .contact { grid-template-columns: 1fr; }
-  .hero-image { grid-row: 1; min-height: 300px; }
-  .benefits { grid-template-columns: repeat(2, 1fr); }
-  .gallery { grid-template-columns: repeat(2, 1fr); }
-}
-@media(max-width: 520px) {
-  nav { font-size: 10px; }
-  .hero-text { padding: 40px 7%; }
-  section.content { padding: 55px 6%; }
-  .benefits, .gallery, .steps { grid-template-columns: 1fr; }
-  .benefits article { border-right: none; }
-  .section-heading h2 { font-size: 34px; }
-  .project { height: 250px; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier Atlas MDF | تفصيل وصناعة الحلول الخشبية الفاخرة - بني ملال</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        parchment: '#fef9ef',
+                        'aged-paper': '#f5eee1',
+                        'warm-taupe': '#d1c9bf',
+                        ink: '#2a2b2f',
+                        charcoal: '#333333',
+                        graphite: '#515151',
+                        terracotta: '#b05a36',
+                        'terracotta-light': '#d4a68e',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Amiri', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #fef9ef; color: #2a2b2f; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .editorial-title { font-family: 'Amiri', serif; }
+        .terracotta-seal { background: linear-gradient(116deg, rgb(176, 90, 54), rgb(212, 166, 142)); }
+    </style>
 </head>
-<body>
+<body class="bg-parchment text-ink selection:bg-terracotta selection:text-parchment">
 
-<header>
-  <a class="logo" href="#accueil">
-    MDF
-    <small>MEUBLES & DÉCORATION</small>
-  </a>
-  <nav>
-    <a href="#accueil">Accueil</a>
-    <a href="#services">Services</a>
-    <a href="#realisations">Réalisations</a>
-    <a href="#apropos">À propos</a>
-    <a href="#contact">Contact</a>
-    <a class="devis" href="#contact">Demande de devis ↗</a>
-  </nav>
-</header>
+    <!-- Announcement Bar -->
+    <div class="sticky top-0 z-50 bg-terracotta text-parchment text-xs py-2.5 px-4 text-center font-semibold tracking-wide shadow-sm">
+        + خدمة القياس والتصميم ثلاثي الأبعاد مجاناً في مدينة **بني ملال** والنواحي | اتصل الان: <a href="tel:+212676586384" class="underline">+212 676-586384</a>
+    </div>
 
-<main>
-<section class="hero" id="accueil">
-  <div class="hero-text">
-    <span class="eyebrow">Votre projet, notre savoir-faire</span>
-    <h1>Le sur-mesure prend forme.</h1>
-    <p>
-      Nous concevons et réalisons des meubles et aménagements
-      en MDF adaptés à vos espaces, à vos goûts et à votre budget.
-    </p>
-    <a class="button" href="#realisations">Découvrir nos projets ↗</a>
-  </div>
-  <div class="hero-image" role="img" aria-label="Intérieur moderne"></div>
-</section>
+    <!-- Primary Navigation Bar -->
+    <header class="sticky top-9 z-40 bg-parchment/90 backdrop-blur-md border-b border-warm-taupe px-6 py-4 flex items-center justify-between max-w-[1280px] mx-auto rounded-b-[12px]">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full terracotta-seal flex items-center justify-center text-parchment font-bold text-base shadow-sm">A</div>
+            <a href="#" class="editorial-title text-2xl font-bold tracking-tight">Atelier Atlas <span class="italic font-light text-terracotta">MDF</span></a>
+        </div>
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-charcoal">
+            <a href="#models" class="hover:text-terracotta transition">الموديلات</a>
+            <a href="#gallery" class="hover:text-terracotta transition">معرض الأعمال</a>
+            <a href="#calculator" class="hover:text-terracotta transition">حاسبة التكلفة</a>
+            <a href="#contact" class="hover:text-terracotta transition">اتصل بنا</a>
+        </nav>
+        <div class="flex items-center gap-4">
+            <a href="https://wa.me/212676586384?text=السلام%20عليكم،%20أريد%20استفسار%20حول%20أعمال%20MDF%20ببني%20ملال" target="_blank" class="bg-terracotta text-parchment px-6 py-3 rounded-[40px] text-sm font-semibold hover:opacity-90 transition shadow-sm">
+                طلب عبر الواتساب +
+            </a>
+        </div>
+    </header>
 
-<section class="benefits">
-  <article>
-    <h3>◇ Qualité soignée</h3>
-    <p>Des matériaux sélectionnés et des finitions propres.</p>
-  </article>
-  <article>
-    <h3>⌁ Sur mesure</h3>
-    <p>Des meubles adaptés à votre espace et à vos besoins.</p>
-  </article>
-  <article>
-    <h3>◷ Suivi du projet</h3>
-    <p>De la conception jusqu'à l'installation.</p>
-  </article>
-  <article>
-    <h3>♧ Sens du détail</h3>
-    <p>Des solutions pratiques et esthétiques.</p>
-  </article>
-</section>
+    <!-- Hero Section -->
+    <section class="max-w-[1280px] mx-auto px-6 py-16 md:py-24 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+        <div class="md:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 bg-aged-paper border border-warm-taupe px-4 py-1.5 rounded-[9999px] text-xs font-semibold text-terracotta tracking-wider uppercase">
+                <span>+ الورشة الاحترافية ببني ملال</span>
+            </div>
+            <h1 class="editorial-title text-4xl md:text-6xl lg:text-7xl leading-[1.1] text-ink">
+                إتقان الصنعة و <span class="italic font-light text-terracotta">فخامة التصميم</span> الخشبي.
+            </h1>
+            <p class="text-charcoal text-base md:text-lg leading-relaxed max-w-xl font-light">
+                نحول مساحتك إلى تحفة معمارية متكاملة بمدينة بني ملال. تفصيل مطابخ عصرية، خزائن ملابس Dressing، وتكسيات حوائط بـ MDF عالي الجودة المقاوم للرطوبة.
+            </p>
+            <div class="flex flex-wrap items-center gap-4 pt-4">
+                <a href="#calculator" class="bg-terracotta text-parchment px-8 py-4 rounded-[40px] text-sm font-semibold hover:opacity-90 transition shadow-sm">
+                    احسب تكلفتك الآن +
+                </a>
+                <a href="#gallery" class="border-[1.5px] border-terracotta text-terracotta px-8 py-4 rounded-[40px] text-sm font-semibold hover:bg-aged-paper transition">
+                    تصفح معرض الصور +
+                </a>
+            </div>
+            <div class="pt-8 grid grid-cols-3 gap-6 border-t border-warm-taupe">
+                <div>
+                    <p class="editorial-title text-3xl font-bold text-ink">100%</p>
+                    <p class="text-xs text-graphite font-medium">مقاوم للرطوبة Hydro</p>
+                </div>
+                <div>
+                    <p class="editorial-title text-3xl font-bold text-ink">+500</p>
+                    <p class="text-xs text-graphite font-medium">مشروع منجز بنجاح</p>
+                </div>
+                <div>
+                    <p class="editorial-title text-3xl font-bold text-ink">بني ملال</p>
+                    <p class="text-xs text-graphite font-medium">الخدمة والتركيب المحلي</p>
+                </div>
+            </div>
+        </div>
+        <div class="md:col-span-5">
+            <div class="bg-aged-paper p-5 rounded-[24px] shadow-xl border border-warm-taupe">
+                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=900&q=80" alt="مطبخ MDF فخم" class="w-full h-[420px] object-cover rounded-[16px]">
+                <div class="mt-4 px-2 flex justify-between items-center">
+                    <div>
+                        <p class="text-xs font-semibold text-terracotta uppercase">تصميم مرجعي فاخر</p>
+                        <p class="editorial-title text-xl text-ink">مطابخ L-Shape عصرية</p>
+                    </div>
+                    <span class="text-xs font-mono text-graphite">Atlas Series</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="content" id="services">
-  <div class="section-heading">
-    <span class="eyebrow">Nos services</span>
-    <h2>Des idées bien pensées.<br>Des espaces transformés.</h2>
-    <p>Des solutions pour la maison, le bureau et les espaces professionnels.</p>
-  </div>
+    <!-- Gallery Section -->
+    <section id="gallery" class="bg-aged-paper py-20 px-6 my-12 border-y border-warm-taupe">
+        <div class="max-w-[1280px] mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-semibold text-terracotta tracking-widest uppercase">معرض الصور والأعمال</span>
+                <h2 class="editorial-title text-3xl md:text-5xl text-ink">تصاميم مطابخ وخزائن مستوحاة من أحدث المعايير العالمية</h2>
+                <p class="text-charcoal text-sm font-light">صور حقيقية لنماذج الـ MDF التي نقوم بتفصيلها وتركيبها خصيصاً لتناسب المنازل والشقق العصرية.</p>
+            </div>
 
-  <div class="gallery" id="realisations">
-    <a class="project" href="#contact">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80" alt="Cuisine moderne">
-      <span>Cuisines sur mesure</span>
-    </a>
-    <a class="project" href="#contact">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=80" alt="Rangements intégrés">
-      <span>Placards & dressings</span>
-    </a>
-    <a class="project" href="#contact">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=900&q=80" alt="Chambre moderne">
-      <span>Chambres</span>
-    </a>
-    <a class="project" href="#contact">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80" alt="Salon moderne">
-      <span>Meubles TV & salon</span>
-    </a>
-    <a class="project" href="#contact">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80" alt="Bureau professionnel">
-      <span>Bureaux professionnels</span>
-    </a>
-    <a class="project" href="#contact">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80" alt="Décoration intérieure">
-      <span>Décoration intérieure</span>
-    </a>
-  </div>
-</section>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-parchment p-6 rounded-[24px] border border-warm-taupe shadow-sm flex flex-col justify-between">
+                    <div>
+                        <img src="https://aisliving.en.made-in-china.com/product/NEQRcAiuahWC/China-AIS-Free-Design-Modern-Simple-Customized-Complete-Kitchen-Furniture-L-Shape-Cuisine-Plywood-MDF-Kitchen-Cabinet-for-Apartment.jpg" alt="مطبخ مودرن" class="w-full h-64 object-cover rounded-[16px] mb-4" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'">
+                        <span class="text-[11px] font-mono text-terracotta uppercase">Model 01 · L-Shape Kitchen</span>
+                        <h3 class="editorial-title text-2xl text-ink mt-1 mb-2">مطابخ L-Shape بـ Plywood & MDF</h3>
+                        <p class="text-sm text-charcoal font-light leading-relaxed">تصميم عملي ذكي يستغل الزوايا، مع أدراج واسعة وإكسسوارات إغلاق ناعم (Soft-Close).</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-warm-taupe flex justify-between items-center text-xs font-semibold">
+                        <span class="text-ink">تفصيل حسب الطلب</span>
+                        <a href="https://wa.me/212676586384?text=أهلاً،%20أهتم%20بموديل%20مطبخ%20L-Shape" target="_blank" class="text-terracotta hover:underline">اطلب تصميم مشابه ←</a>
+                    </div>
+                </div>
 
-<section class="content about" id="apropos">
-  <img loading="lazy" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85" alt="Aménagement intérieur">
-  <div>
-    <span class="eyebrow">À propos de l'atelier</span>
-    <h2>Votre espace mérite une solution unique.</h2>
-    <p>
-      Nous commençons par comprendre vos besoins, vos dimensions
-      et vos préférences pour imaginer un mobilier fonctionnel
-      et harmonieux.
-    </p>
-    <p>Chaque détail compte : organisation, matériaux et finitions.</p>
-    <a class="button" href="#contact">Parlons de votre projet ↗</a>
-  </div>
-</section>
+                <!-- Card 2 -->
+                <div class="bg-parchment p-6 rounded-[24px] border border-warm-taupe shadow-sm flex flex-col justify-between">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80" alt="خزانة ملابس" class="w-full h-64 object-cover rounded-[16px] mb-4">
+                        <span class="text-[11px] font-mono text-terracotta uppercase">Model 02 · Dressing Room</span>
+                        <h3 class="editorial-title text-2xl text-ink mt-1 mb-2">خزائن ملابس Dressing Room فاخرة</h3>
+                        <p class="text-sm text-charcoal font-light leading-relaxed">تنظيم داخلي هندسي، رفوف زجاجية، وإضاءة LED مندمجة تضفي رونقاً خاصاً على غرفة النوم.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-warm-taupe flex justify-between items-center text-xs font-semibold">
+                        <span class="text-ink">مقاسات مخصصة</span>
+                        <a href="https://wa.me/212676586384?text=أهلاً،%20أهتم%20بخزانة%20الملابس%20Dressing" target="_blank" class="text-terracotta hover:underline">اطلب تصميم مشابه ←</a>
+                    </div>
+                </div>
 
-<section class="content">
-  <span class="eyebrow">Notre méthode</span>
-  <h2>Trois étapes, un projet réussi.</h2>
-  <div class="steps">
-    <article>
-      <strong>01</strong>
-      <h3>Échange & mesures</h3>
-      <p>Nous discutons de votre idée, de vos dimensions et de vos besoins.</p>
-    </article>
-    <article>
-      <strong>02</strong>
-      <h3>Conception & devis</h3>
-      <p>Nous définissons les matériaux, les finitions et le budget estimatif.</p>
-    </article>
-    <article>
-      <strong>03</strong>
-      <h3>Fabrication & pose</h3>
-      <p>Nous préparons votre mobilier puis organisons son installation.</p>
-    </article>
-  </div>
-</section>
+                <!-- Card 3 -->
+                <div class="bg-parchment p-6 rounded-[24px] border border-warm-taupe shadow-sm flex flex-col justify-between">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" alt="تكسيات جدارية" class="w-full h-64 object-cover rounded-[16px] mb-4">
+                        <span class="text-[11px] font-mono text-terracotta uppercase">Model 03 · Wall Paneling</span>
+                        <h3 class="editorial-title text-2xl text-ink mt-1 mb-2">تكسيات جدارية خشبية Fluted Wall</h3>
+                        <p class="text-sm text-charcoal font-light leading-relaxed">ألواح MDF مزخرفة لإعطاء صالونات الاستقبال ومداخل الشقق مظهراً راقياً ومقاوماً للخدوش.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-warm-taupe flex justify-between items-center text-xs font-semibold">
+                        <span class="text-ink">تركيب احترافي</span>
+                        <a href="https://wa.me/212676586384?text=أهلاً،%20أهتم%20بتكسيات%20الحوائط%20Wood%20Paneling" target="_blank" class="text-terracotta hover:underline">اطلب تصميم مشابه ←</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="contact" id="contact">
-  <div>
-    <span class="eyebrow">Contact</span>
-    <h2>Un espace à aménager ?</h2>
-    <p>
-      Décrivez-nous votre projet MDF pour préparer une demande de devis.
-    </p>
-    <p>⌖ Béni Mellal, Maroc</p>
-    <p>☎ Ajoutez ici votre numéro de téléphone</p>
-  </div>
+    <!-- Interactive Cost Calculator -->
+    <section id="calculator" class="max-w-4xl mx-auto px-6 py-20">
+        <div class="bg-aged-paper border border-warm-taupe p-8 md:p-12 rounded-[24px] shadow-lg">
+            <span class="text-xs font-semibold text-terracotta uppercase tracking-widest block mb-2">+ أداة التقدير الفوري</span>
+            <h2 class="editorial-title text-3xl md:text-4xl text-ink mb-6">حاسبة تكلفة مشاريع الـ MDF</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <label class="block text-xs font-semibold text-charcoal uppercase mb-2">نوع المشروع:</label>
+                    <select id="projectType" class="w-full bg-parchment border border-warm-taupe rounded-[9999px] px-6 py-3.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-terracotta">
+                        <option value="kitchen">مطبخ عصري (Kitchen Furniture)</option>
+                        <option value="dressing">خزانة ملابس (Dressing Room)</option>
+                        <option value="paneling">تكسيات جدارية (Wall Paneling)</option>
+                        <option value="tv">وحدة تلفاز معلقة (TV Unit)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-charcoal uppercase mb-2">نوع الخشب والتشطيب:</label>
+                    <select id="materialType" class="w-full bg-parchment border border-warm-taupe rounded-[9999px] px-6 py-3.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-terracotta">
+                        <option value="hydro">MDF Hydrofuge ضد الرطوبة (ممتاز)</option>
+                        <option value="laque">MDF Laqué (تشطيب لامع فخم)</option>
+                        <option value="stratifie">MDF Stratifié (عملي واقتصادي)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-charcoal uppercase mb-2">المساحة التقريبية (أمتار طولية):</label>
+                    <input type="number" id="areaSize" value="4" min="1" max="100" class="w-full bg-parchment border border-warm-taupe rounded-[9999px] px-6 py-3.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-terracotta">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-charcoal uppercase mb-2">نوع الإكسسوارات والمفصلات:</label>
+                    <select id="accessories" class="w-full bg-parchment border border-warm-taupe rounded-[9999px] px-6 py-3.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-terracotta">
+                        <option value="standard">إكسسوارات عادية متينة</option>
+                        <option value="blum">إكسسوارات أوروبية Soft-Close (أصلية)</option>
+                    </select>
+                </div>
+            </div>
 
-  <form id="quoteForm">
-    <input name="name" placeholder="Votre nom" required>
-    <input name="phone" placeholder="Téléphone / WhatsApp" required>
-    <select name="project" required>
-      <option value="">Type de projet</option>
-      <option>Cuisine</option>
-      <option>Placard / dressing</option>
-      <option>Chambre</option>
-      <option>Meuble TV / salon</option>
-      <option>Bureau professionnel</option>
-      <option>Autre projet</option>
-    </select>
-    <input name="city" placeholder="Votre ville">
-    <textarea name="details" placeholder="Décrivez votre projet..."></textarea>
-    <button type="submit">Préparer ma demande ↗</button>
-  </form>
-</section>
-</main>
+            <div class="border-t border-warm-taupe pt-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <span class="text-xs text-graphite block uppercase font-mono font-medium">التكلفة التقديرية التقريبية:</span>
+                    <span id="priceResult" class="editorial-title text-3xl text-terracotta font-bold">أدخل المقاسات أعلاه</span>
+                </div>
+                <button onclick="calculatePrice()" class="w-full md:w-auto bg-terracotta text-parchment px-8 py-4 rounded-[40px] text-sm font-semibold hover:opacity-90 transition shadow-sm">
+                    حساب السعر بدقة +
+                </button>
+            </div>
+        </div>
+    </section>
 
-<footer>
-  <span>© <span id="year"></span> MDF Atelier</span>
-  <span>Meubles & décoration sur mesure</span>
-  <a href="#accueil">Retour en haut ↑</a>
-</footer>
+    <!-- Contact & Booking Section -->
+    <section id="contact" class="bg-aged-paper py-20 px-6 border-t border-warm-taupe">
+        <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <span class="text-xs font-semibold text-terracotta uppercase tracking-widest">+ تواصل مباشر</span>
+                <h2 class="editorial-title text-3xl md:text-5xl text-ink">جاهزون لبدء مشروعك الخشبي في بني ملال</h2>
+                <p class="text-charcoal text-sm md:text-base leading-relaxed font-light">
+                    تواصل معنا عبر البريد الإلكتروني أو الهاتف، أو تفضل بزيارة الورشة في بني ملال لمناقشة أفكارك واختيار العينات والألوان المناسبة لمنزلك.
+                </p>
+                
+                <div class="space-y-4 pt-2 font-mono text-sm text-charcoal">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-parchment border border-warm-taupe flex items-center justify-center text-terracotta">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <span>ahmdmoudah98gmail.com</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-parchment border border-warm-taupe flex items-center justify-center text-terracotta">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <span>+212 676-586384</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-parchment border border-warm-taupe flex items-center justify-center text-terracotta">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <span>الورشة المركزية — بني ملال، المغرب</span>
+                    </div>
+                </div>
+            </div>
 
-<script>
-document.getElementById("year").textContent =
-  new Date().getFullYear();
+            <div class="bg-parchment border border-warm-taupe p-8 rounded-[24px] shadow-sm">
+                <h3 class="editorial-title text-2xl text-ink mb-6">طلب استشارة أو أخذ المقاسات</h3>
+                <form onsubmit="sendWhatsAppOrder(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-charcoal uppercase mb-1">الاسم الكريم:</label>
+                        <input type="text" id="clientName" required class="w-full bg-aged-paper border border-warm-taupe rounded-[9999px] px-6 py-3 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-terracotta" placeholder="أدخل اسمك الكامل">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-charcoal uppercase mb-1">رقم الهاتف:</label>
+                        <input type="tel" id="clientPhone" required class="w-full bg-aged-paper border border-warm-taupe rounded-[9999px] px-6 py-3 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-terracotta" placeholder="+212 ...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-charcoal uppercase mb-1">تفاصيل المشروع أو المقاسات:</label>
+                        <textarea id="clientNotes" rows="4" required class="w-full bg-aged-paper border border-warm-taupe rounded-[16px] px-6 py-3 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-terracotta" placeholder="اكتب نوع المطبخ أو الخزانة المطلوبة، والألوان..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-terracotta text-parchment py-4 rounded-[40px] text-sm font-semibold hover:opacity-90 transition shadow-sm">
+                        إرسال الطلب عبر الواتساب فوراً +
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-document.getElementById("quoteForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+    <!-- Footer -->
+    <footer class="bg-ink text-parchment py-12 px-6">
+        <div class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6 border-b border-white/10 pb-8">
+            <div>
+                <span class="editorial-title text-2xl font-bold tracking-tight">Atelier Atlas MDF</span>
+                <p class="text-xs text-parchment/60 mt-1">الاحترافية في تصميم وتصنيع الحلول الخشبية ببني ملال.</p>
+            </div>
+            <div class="flex items-center gap-6 text-sm font-mono">
+                <a href="https://wa.me/212676586384" target="_blank" class="hover:text-terracotta transition"><i class="fa-brands fa-whatsapp text-lg"></i> +212 676-586384</a>
+                <a href="mailto:ahmdmoudah98gmail.com" class="hover:text-terracotta transition"><i class="fa-solid fa-envelope text-lg"></i> ahmdmoudah98gmail.com</a>
+            </div>
+        </div>
+        <div class="max-w-[1280px] mx-auto pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-parchment/50">
+            <p>© 2026 Atelier Atlas MDF — بني ملال. جميع الحقوق محفوظة.</p>
+            <p class="mt-2 md:mt-0 font-light">تصميم معماري راقي مستوحى من المعايير العالمية.</p>
+        </div>
+    </footer>
 
-  const data = new FormData(this);
-  const message =
-`Bonjour, je souhaite demander un devis MDF.
-Nom : ${data.get("name")}
-Téléphone : ${data.get("phone")}
-Projet : ${data.get("project")}
-Ville : ${data.get("city") || "Non précisée"}
-Détails : ${data.get("details") || "À discuter"}`;
+    <!-- JavaScript Calculations -->
+    <script>
+        function calculatePrice() {
+            const type = document.getElementById('projectType').value;
+            const material = document.getElementById('materialType').value;
+            const area = parseFloat(document.getElementById('areaSize').value) || 1;
+            const accessories = document.getElementById('accessories').value;
 
-  // Remplace ce numéro par ton numéro WhatsApp
-  // avec l'indicatif du pays, sans + ni espaces.
-  const whatsapp = "2126XXXXXXXX";
+            let baseRate = 1900; 
+            if (type === 'kitchen') baseRate = 2500;
+            if (type === 'dressing') baseRate = 2100;
+            if (type === 'paneling') baseRate = 1500;
+            if (type === 'tv') baseRate = 1700;
 
-  if (whatsapp.includes("X")) {
-    alert("Ajoute ton vrai numéro WhatsApp dans le code.");
-    return;
-  }
+            if (material === 'hydro') baseRate *= 1.25;
+            if (material === 'laque') baseRate *= 1.45;
+            if (accessories === 'blum') baseRate += 400;
 
-  window.open(
-    "https://wa.me/" + whatsapp + "?text=" + encodeURIComponent(message),
-    "_blank"
-  );
-});
-</script>
+            let total = baseRate * area;
+            document.getElementById('priceResult').innerText = total.toLocaleString() + ' درهم تقريباً';
+        }
 
+        function sendWhatsAppOrder(event) {
+            event.preventDefault();
+            const name = document.getElementById('clientName').value;
+            const phone = document.getElementById('clientPhone').value;
+            const notes = document.getElementById('clientNotes').value;
+
+            const text = `السلام عليكم Atelier Atlas MDF، أريد طلب استشارة أو قياس:%0a- الاسم: ${name}%0a- الهاتف: ${phone}%0a- التفاصيل: ${notes}`;
+            window.open(`https://wa.me/212676586384?text=${text}`, '_blank');
+        }
+    </script>
 </body>
 </html>
