@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="scroll-smooth">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atelier Atlas MDF | تفصيل وصناعة الحلول الخشبية الفاخرة - بني ملال</title>
+    <title>Atelier Atlas MDF | الورشة الهندسيـة لتفصيل الألواح - بني ملال</title>
     <!-- Tailwind CSS v3 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Reem+Kufi:wght@400..700&display=swap">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -18,158 +18,134 @@
             theme: {
                 extend: {
                     colors: {
-                        parchment: '#fef9ef',
-                        'aged-paper': '#f5eee1',
-                        'warm-taupe': '#d1c9bf',
-                        ink: '#2a2b2f',
-                        charcoal: '#333333',
-                        graphite: '#515151',
-                        terracotta: '#b05a36',
-                        'terracotta-light': '#d4a68e',
-                        'mdf-tan': '#b58a5d',
+                        paper: '#eceae4',
+                        'paper-2': '#e1ded5',
+                        mast: '#fbfaf7',
+                        ink: '#1c1b18',
+                        'ink-2': '#57534a',
+                        rule: '#1c1b18',
+                        mdf: '#b58a5d',
+                        dim: '#2a49c8',
+                        foot: '#101a3a',
+                        'foot-ink': '#e8dcc9',
+                        k1: '#d4553a',
+                        k2: '#f2b632',
+                        k3: '#14807a',
+                        k5: '#24365e',
                     },
                     fontFamily: {
-                        sans: ['IBM Plex Sans Arabic', 'sans-serif'],
-                        serif: ['Reem Kufi', 'serif'],
+                        display: ['Reem Kufi', 'sans-serif'],
+                        body: ['IBM Plex Sans Arabic', 'sans-serif'],
+                        mono: ['IBM Plex Mono', 'monospace'],
                     }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #fef9ef; color: #2a2b2f; font-family: 'IBM Plex Sans Arabic', sans-serif; }
-        .editorial-title { font-family: 'Reem Kufi', serif; }
-        .terracotta-gradient { background: linear-gradient(116deg, rgb(176, 90, 54), rgb(212, 166, 142)); }
+        body { background-color: #eceae4; color: #1c1b18; font-family: 'IBM Plex Sans Arabic', sans-serif; }
+        .grid-rule { display: grid; gap: 1px; background: #1c1b18; border: 1px solid #1c1b18; }
+        .grid-rule > * { background: #eceae4; min-width: 0; }
     </style>
 </head>
-<body class="bg-parchment text-ink selection:bg-terracotta selection:text-parchment">
+<body class="bg-paper text-ink selection:bg-k1 selection:text-white">
 
-    <!-- Announcement Bar -->
-    <div class="bg-terracotta text-parchment text-xs py-2.5 px-4 text-center font-medium tracking-wide">
-        + خدمة قياس وتصميم ثلاثي الأبعاد مجاناً في مدينة **بني ملال** والنواحي | اتصل الان: <a href="tel:+212676586384" class="underline font-bold">+212 676-586384</a>
+    <!-- Top Color Band -->
+    <div class="h-2.5 w-full flex">
+        <div class="bg-k1 flex-1"></div>
+        <div class="bg-k2 flex-1"></div>
+        <div class="bg-k3 flex-1"></div>
+        <div class="bg-k5 flex-1"></div>
     </div>
 
-    <!-- Primary Navigation Bar -->
-    <header class="sticky top-0 z-50 bg-parchment/90 backdrop-blur-md border-b border-warm-taupe px-6 py-4 flex items-center justify-between max-w-7xl mx-auto rounded-b-[12px]">
-        <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-full terracotta-gradient flex items-center justify-center text-parchment font-bold text-sm">A</div>
-            <a href="#" class="editorial-title text-xl font-bold tracking-tight">Atelier Atlas <span class="italic font-light text-terracotta">MDF</span></a>
-        </div>
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-charcoal">
-            <a href="#materials" class="hover:text-terracotta transition">الخامات</a>
-            <a href="#calculator" class="hover:text-terracotta transition">حاسبة الألواح</a>
-            <a href="#gallery" class="hover:text-terracotta transition">معرض الصور</a>
-            <a href="#quote" class="hover:text-terracotta transition">اطلب عرض سعر</a>
-        </nav>
-        <div class="flex items-center gap-4">
-            <a href="https://wa.me/212676586384?text=السلام%20عليكم،%20أريد%20استفسار%20حول%20أعمال%20MDF%20ببني%20ملال" target="_blank" class="bg-terracotta text-parchment px-5 py-2.5 rounded-[40px] text-sm font-semibold hover:opacity-90 transition shadow-sm">
-                طلب عبر الواتساب +
-            </a>
+    <!-- Masthead -->
+    <header class="sticky top-0 z-50 bg-mast border-b border-rule">
+        <div class="max-w-[1320px] mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="#" class="inline-flex items-baseline gap-2 text-decoration-none">
+                    <span class="font-display font-medium text-2xl">Atelier Atlas</span>
+                    <span class="font-mono text-xs uppercase tracking-widest border border-ink px-2 py-0.5 bg-k2 text-ink">MDF بني ملال</span>
+                </a>
+            </div>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#materials" class="hover:text-k1 transition">الخامات</a>
+                <a href="#calc" class="hover:text-k1 transition">حاسبة الألواح</a>
+                <a href="#gallery" class="hover:text-k1 transition">معرض الأعمال</a>
+                <a href="#quote" class="hover:text-k1 transition">طلب عرض سعر</a>
+            </nav>
+            <div>
+                <a href="https://wa.me/212676586384?text=السلام%20عليكم،%20أريد%20الاستفسار%20حول%20أعمال%20MDF" target="_blank" class="font-medium text-xs md:text-sm border border-ink px-4 py-2 bg-ink text-paper hover:bg-transparent hover:text-ink transition">
+                    + واتساب المباشر
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="max-w-7xl mx-auto px-6 py-16 md:py-24 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-        <div class="md:col-span-7 space-y-6">
-            <div class="inline-flex items-center gap-2 bg-aged-paper border border-warm-taupe px-3.5 py-1.5 rounded-[9999px] text-xs font-semibold text-terracotta tracking-wider uppercase">
-                <span>+ الورشة الاحترافية ببني ملال</span>
-            </div>
-            <h1 class="editorial-title text-4xl md:text-6xl lg:text-7xl leading-[1.1] text-ink">
-                ألواح MDF بمقاسك <span class="italic font-light text-terracotta">بالمللي</span>، من القص للتركيب.
-            </h1>
-            <p class="text-charcoal text-base md:text-lg leading-relaxed max-w-xl font-light">
-                نستلم مقاسات المكان في بني ملال، نرسم قائمة القطع، نوزّعها على اللوح الخام بأقل هالك، ونقصّ ونحفر CNC ونركّب باحترافية تامة.
-            </p>
-            <div class="flex flex-wrap items-center gap-4 pt-4">
-                <a href="#calculator" class="bg-terracotta text-parchment px-7 py-3.5 rounded-[40px] text-sm font-semibold hover:opacity-90 transition">
-                    حاسبة الألواح الفورية +
-                </a>
-                <a href="#quote" class="border-[1.5px] border-terracotta text-terracotta px-7 py-3.5 rounded-[40px] text-sm font-semibold hover:bg-aged-paper transition">
-                    اطلب عرض سعر +
-                </a>
-            </div>
-            <div class="pt-6 grid grid-cols-3 gap-6 border-t border-warm-taupe/60 text-center md:text-right">
-                <div>
-                    <p class="editorial-title text-3xl font-bold text-ink">2440×1220</p>
-                    <p class="text-xs text-graphite">المقاس القياسي للوح الخام (مم)</p>
+    <main>
+        <!-- Hero Section -->
+        <section class="border-b border-rule py-12 md:py-20 bg-k2/10">
+            <div class="max-w-[1320px] mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end mb-12">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 text-xs font-mono text-dim">
+                            <span class="w-2.5 h-2.5 bg-k1 inline-block"></span>
+                            <span>ألواح MDF · قص CNC · تصميم هندسي دقيق</span>
+                        </div>
+                        <h1 class="font-display text-4xl md:text-6xl lg:text-7xl leading-tight">
+                            ألواح MDF بمقاسك <span class="bg-ink text-k2 px-2 py-0.5">بالمللي</span>، من القص للتركيب.
+                        </h1>
+                        <p class="text-ink-2 text-lg max-w-2xl font-light">
+                            نستلم مقاسات المكان في بني ملال، نرسم قائمة القطع بدقة، نوزّعها على اللوح الخام (2440 × 1220 مم) بأقل هالك، وننفذ بالـ CNC والدهان الفاخر.
+                        </p>
+                        <div class="flex flex-wrap gap-4 pt-2">
+                            <a href="#quote" class="bg-ink text-paper px-6 py-3 font-medium text-sm border border-ink hover:bg-transparent hover:text-ink transition">اطلب عرض سعر</a>
+                            <a href="#calc" class="border border-ink px-6 py-3 font-medium text-sm hover:bg-ink hover:text-paper transition">+ احسب عدد الألواح</a>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-5 border border-rule bg-paper-2 p-6">
+                        <div class="space-y-4 font-mono text-sm">
+                            <div class="flex justify-between border-b border-rule pb-2">
+                                <span class="text-ink-2">مقاس اللوح الخام القياسي:</span>
+                                <b class="text-ink">2440 × 1220 مم</b>
+                            </div>
+                            <div class="flex justify-between border-b border-rule pb-2">
+                                <span class="text-ink-2">السماكات المتوفرة:</span>
+                                <b class="text-ink">6 إلى 25 مم</b>
+                            </div>
+                            <div class="flex justify-between border-b border-rule pb-2">
+                                <span class="text-ink-2">البريد الإلكتروني:</span>
+                                <b class="text-ink text-xs">ahmdmoudah98gmail.com</b>
+                            </div>
+                            <div class="flex justify-between pb-1">
+                                <span class="text-ink-2">الهاتف والواتساب:</span>
+                                <b class="text-ink">+212 676-586384</b>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <p class="editorial-title text-3xl font-bold text-ink">Hydro</p>
-                    <p class="text-xs text-graphite">مقاوم للرطوبة للمطابخ</p>
-                </div>
-                <div>
-                    <p class="editorial-title text-3xl font-bold text-ink">بني ملال</p>
-                    <p class="text-xs text-graphite">خدمة المعاينة والتركيب</p>
-                </div>
             </div>
-        </div>
-        <div class="md:col-span-5">
-            <div class="bg-aged-paper p-4 rounded-[24px] shadow-xl border border-warm-taupe">
-                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=900&q=80" alt="مطبخ MDF فخم" class="w-full h-[400px] object-cover rounded-[16px]">
-                <div class="mt-4 px-2 flex justify-between items-center text-xs font-mono text-graphite">
-                    <span>Atlas Precision Cut</span>
-                    <span class="text-terracotta font-semibold">MDF 18 mm Hydro</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Materials Section -->
-    <section id="materials" class="bg-aged-paper py-20 px-6 border-y border-warm-taupe">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <span class="text-xs font-semibold text-terracotta tracking-widest uppercase">الخامات المعتمدة</span>
-                <h2 class="editorial-title text-3xl md:text-5xl text-ink">خمس خامات، ولكل واحدة مكانها.</h2>
-                <p class="text-charcoal text-sm font-light">الفرق بينها أكبر من السعر. القلب هو اللي بيحدد تستخدمها فين، وبتتعرّف عليه من لونه.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-parchment p-6 rounded-[24px] border border-warm-taupe flex flex-col justify-between">
-                    <div>
-                        <div class="h-6 w-full bg-[#b58a5d] rounded mb-4 border border-warm-taupe"></div>
-                        <h3 class="editorial-title text-2xl text-ink mb-2">MDF قياسي (Standard)</h3>
-                        <p class="text-sm text-charcoal font-light leading-relaxed">الخامة الأساسية للدواليب الداخلية والتجليد وأعمال الحفر. سطحه أملس وناعم، فيقبل الدهان والـ CNC.</p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-warm-taupe text-xs text-graphite font-mono">
-                        السماكات: 6, 9, 12, 16, 18, 25 مم
-                    </div>
+        <!-- Materials Section -->
+        <section id="materials" class="border-b border-rule py-16 bg-[#d6ebe4]">
+            <div class="max-w-[1320px] mx-auto px-4">
+                <div class="mb-12">
+                    <p class="text-xs font-mono text-k3 mb-2 uppercase tracking-widest">+ دليل الخامات</p>
+                    <h2 class="font-display text-3xl md:text-4xl">خمس خامات، ولكل واحدة مكانها.</h2>
                 </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-paper border border-rule p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="h-6 w-full bg-[#b58a5d] border border-rule mb-4"></div>
+                            <h3 class="font-display text-xl mb-2">MDF قياسي (Standard)</h3>
+                            <p class="text-ink-2 text-sm">الخامة الأساسية للدواليب الداخلية والتجليد وأعمال الحفر بالـ CNC. سطحه أملس يقبل الدهان بامتياز.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-rule font-mono text-xs text-ink-2">القلب: بني فاتح · سماكات متعددة</div>
+                    </div>
 
-                <div class="bg-parchment p-6 rounded-[24px] border border-warm-taupe flex flex-col justify-between">
-                    <div>
-                        <div class="h-6 w-full bg-[#74865a] rounded mb-4 border border-warm-taupe"></div>
-                        <h3 class="editorial-title text-2xl text-ink mb-2">MDF مقاوم للرطوبة (MR)</h3>
-                        <p class="text-sm text-charcoal font-light leading-relaxed">للمطابخ والحمامات وأي مكان رطوبته عالية. بيتحمّل البخار والرطوبة، ويتميز بالقلب الأخضر المميز.</p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-warm-taupe text-xs text-graphite font-mono">
-                        السماكات الشائعة: 12, 16, 18 مم
-                    </div>
-                </div>
-
-                <div class="bg-parchment p-6 rounded-[24px] border border-warm-taupe flex flex-col justify-between">
-                    <div>
-                        <div class="h-6 w-full bg-[#865a38] rounded mb-4 border border-warm-taupe"></div>
-                        <h3 class="editorial-title text-2xl text-ink mb-2">HDF عالي الكثافة</h3>
-                        <p class="text-sm text-charcoal font-light leading-relaxed">أعلى كثافة وأحمرّ سطح. يُستخدم رقيقًا في ظهر الدواليب وقاع الأدراج وحشوات الأبواب المتينة.</p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-warm-taupe text-xs text-graphite font-mono">
-                        السماكات الشائعة: 3, 6, 8 مم
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Calculator Section -->
-    <section id="calculator" class="max-w-4xl mx-auto px-6 py-20">
-        <div class="bg-aged-paper border border-warm-taupe p-8 md:p-12 rounded-[24px] shadow-lg">
-            <span class="text-xs font-semibold text-terracotta uppercase tracking-widest block mb-2">+ حاسبة الألواح الدقيقة</span>
-            <h2 class="editorial-title text-3xl md:text-4xl text-ink mb-6">كام لوح MDF محتاج لمشروعك؟</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div>
-                    <label class="block text-xs font-semibold text-charcoal uppercase mb-2">العرض الإجمالي (سم):</label>
-                    <input type="number" id="cw" value="360" min="10" max="3000" class="w-full bg-parchment border border-warm-taupe rounded-[9999px] px-5 py-3 text-sm font-mono text-ink focus:outline-none focus:ring-2 focus:ring-terracotta">
-                </div>
-                <div>
-                    <label class="block text-xs font-
+                    <div class="bg-paper border border-rule p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="h-6 w-full bg-[#74865a] border border-rule mb-4"></div>
+                            <h3 class="font-display text-xl mb-2">MDF مقاوم للرطوبة (MR)</h3>
+                            <p class="text-ink-2 text-sm">مخصص للمطابخ،
