@@ -3,152 +3,976 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atelier Atlas MDF | الاستوديو الهندسي للحلول الخشبية الفاخرة - بني ملال</title>
-    <!-- Tailwind CSS v3 -->
+    <title>إتقان MDF | مطابخ وديكورات خشبيّة فاخرة</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
+    <!-- Fonts: Tajawal & Cairo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        parchment: '#fef9ef',
-                        'aged-paper': '#f5eee1',
-                        'warm-taupe': '#d1c9bf',
-                        ink: '#2a2b2f',
-                        charcoal: '#333333',
-                        graphite: '#515151',
-                        terracotta: '#b05a36',
-                        'terracotta-light': '#d4a68e',
+                        wood: {
+                            50: '#fdfbf7',
+                            100: '#f7f1e5',
+                            200: '#eddcc4',
+                            300: '#dec09a',
+                            400: '#cc9e6d',
+                            500: '#ba8046',
+                            600: '#a36739',
+                            700: '#834f31',
+                            800: '#6d422d',
+                            900: '#5a3828',
+                        },
+                        luxgold: {
+                            300: '#f3e5ab',
+                            400: '#e5c158',
+                            500: '#d4af37',
+                            600: '#aa820a',
+                        },
+                        slatecustom: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
                     },
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        serif: ['Amiri', 'serif'],
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #fef9ef; color: #2a2b2f; font-family: 'Plus Jakarta Sans', sans-serif; }
-        .editorial-title { font-family: 'Amiri', serif; }
-        .terracotta-seal { background: linear-gradient(116deg, rgb(176, 90, 54), rgb(212, 166, 142)); }
-        
-        /* Smooth Entrance & Hover Animations */
-        .fade-in-up {
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #fafafa;
+            color: #1e293b;
+            overflow-x: hidden;
         }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cairo', sans-serif;
         }
-        .zoom-hover {
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+        /* Clean White Glassmorphism Card Style */
+        .white-glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
         }
-        .zoom-hover:hover {
-            transform: scale(1.03);
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #ba8046 0%, #d4af37 50%, #834f31 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-button {
+            background: linear-gradient(135deg, #d4af37 0%, #ba8046 100%);
+            color: #ffffff;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px -4px rgba(186, 128, 70, 0.35);
+        }
+        .gold-button:hover {
+            background: linear-gradient(135deg, #e5c158 0%, #a36739 100%);
+            box-shadow: 0 12px 25px -4px rgba(186, 128, 70, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Ken Burns Smooth Motion Animation */
+        @keyframes kenburns {
+            0% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.08) translate(-1%, -1%); }
+            100% { transform: scale(1) translate(0, 0); }
+        }
+
+        .motion-bg-img {
+            animation: kenburns 18s ease-in-out infinite alternate;
+        }
+
+        /* Floating Cards Animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cc9e6d;
+            border-radius: 4px;
         }
     </style>
 </head>
-<body class="bg-parchment text-ink selection:bg-terracotta selection:text-parchment">
+<body x-data="mdfApp()" class="selection:bg-wood-400 selection:text-white">
 
-    <!-- Top Announcement Bar with Moving Glow -->
-    <div class="bg-terracotta text-parchment text-xs py-2.5 px-4 text-center font-medium tracking-wide sticky top-0 z-50 shadow-md">
-        ✨ خدمة المعاينة والرفع الهندسي للمقاسات <strong>مجاناً</strong> في بني ملال والنواحي | اطلب استشارتك الآن: <a href="tel:+212676586384" class="underline font-bold">+212 676-586384</a>
-    </div>
+    <!-- Navbar (White Theme) -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 transition-all duration-300 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-wood-600 to-luxgold-500 p-0.5 shadow-md group-hover:scale-105 transition-transform">
+                        <div class="w-full h-full bg-white rounded-[10px] flex items-center justify-center">
+                            <i class="fa-solid fa-couch text-wood-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-black tracking-wider text-slate-900">إتقان <span class="text-wood-600 font-bold">MDF</span></span>
+                        <span class="text-[10px] text-slate-500 tracking-widest font-semibold">للمطابخ والأثاث العصري</span>
+                    </div>
+                </a>
 
-    <!-- Navigation Bar -->
-    <header class="sticky top-9 z-40 bg-parchment/90 backdrop-blur-md border-b border-warm-taupe px-6 py-4 flex items-center justify-between max-w-[1280px] mx-auto rounded-b-[16px] shadow-sm">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full terracotta-seal flex items-center justify-center text-parchment font-bold text-base shadow-sm">A</div>
-            <a href="#" class="editorial-title text-2xl font-bold tracking-tight">Atelier Atlas <span class="italic font-light text-terracotta">MDF</span></a>
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-bold text-slate-700">
+                    <a href="#hero" class="hover:text-wood-600 transition-colors">الرئيسية</a>
+                    <a href="#estimator" class="hover:text-wood-600 transition-colors flex items-center gap-1.5">
+                        <span>حاسبة التكلفة</span>
+                        <span class="bg-wood-100 text-wood-700 text-[10px] px-2 py-0.5 rounded-full border border-wood-200 font-semibold">تفاعلي</span>
+                    </a>
+                    <a href="#before-after" class="hover:text-wood-600 transition-colors">قبل وبعد</a>
+                    <a href="#portfolio" class="hover:text-wood-600 transition-colors">معرض الأعمال</a>
+                    <a href="#materials" class="hover:text-wood-600 transition-colors">دليل MDF</a>
+                    <a href="#contact" class="hover:text-wood-600 transition-colors">تواصل معنا</a>
+                </nav>
+
+                <!-- Action CTA -->
+                <div class="hidden sm:flex items-center gap-3">
+                    <a href="https://wa.me/212676586384?text=%D0%A1%D0%BB%D0%B0%D0%BC%D0%BE%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%20%D8%A3%D8%AD%D9%85%D8%AF%20%D9%85%D9%88%D8%B6%D9%8F%D8%AD" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-4 py-2.5 rounded-xl border border-emerald-200 text-xs font-bold transition-all">
+                        <i class="fa-brands fa-whatsapp text-lg text-emerald-600"></i>
+                        <span>واتساب مباشر</span>
+                    </a>
+                    <a href="#estimator" class="gold-button px-5 py-2.5 rounded-xl text-xs font-bold shadow-md">
+                        احسب تكلفة مطبخك
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" aria-label="Toggle menu" class="md:hidden text-slate-800 p-2">
+                    <i class="fa-solid text-xl" :class="mobileMenuOpen ? 'fa-xmark' : 'fa-bars'"></i>
+                </button>
+            </div>
         </div>
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-charcoal">
-            <a href="#hero" class="hover:text-terracotta transition">الرئيسية</a>
-            <a href="#catalog" class="hover:text-terracotta transition">كتالوج التصاميم</a>
-            <a href="#calculator" class="hover:text-terracotta transition">حاسبة التكلفة</a>
-            <a href="#features" class="hover:text-terracotta transition">المميزات والخامات</a>
-            <a href="#contact" class="hover:text-terracotta transition">اتصل بنا</a>
-        </nav>
-        <div>
-            <a href="https://wa.me/212676586384?text=السلام%20عليكم،%20أريد%20استفسار%20حول%20مشروع%20MDF%20ببني%20ملال" target="_blank" class="bg-terracotta text-parchment px-6 py-3 rounded-[40px] text-sm font-semibold hover:opacity-90 transition shadow-sm">
-                واتساب مباشر +
-            </a>
+
+        <!-- Mobile Menu Overlay -->
+        <div x-show="mobileMenuOpen" x-cloak class="md:hidden bg-white border-b border-slate-200 px-6 py-6 space-y-4 shadow-xl">
+            <a href="#hero" @click="mobileMenuOpen = false" class="block text-slate-800 font-bold hover:text-wood-600">الرئيسية</a>
+            <a href="#estimator" @click="mobileMenuOpen = false" class="block text-slate-800 font-bold hover:text-wood-600">حاسبة التكلفة التقديرية</a>
+            <a href="#before-after" @click="mobileMenuOpen = false" class="block text-slate-800 font-bold hover:text-wood-600">قبل وبعد (Before & After)</a>
+            <a href="#portfolio" @click="mobileMenuOpen = false" class="block text-slate-800 font-bold hover:text-wood-600">معرض المطابخ والأثاث</a>
+            <a href="#materials" @click="mobileMenuOpen = false" class="block text-slate-800 font-bold hover:text-wood-600">جودة MDF والخامات</a>
+            <a href="#contact" @click="mobileMenuOpen = false" class="block text-slate-800 font-bold hover:text-wood-600">تواصل ومعاينة مجانية</a>
+            <div class="pt-2">
+                <a href="#estimator" @click="mobileMenuOpen = false" class="w-full block text-center gold-button py-3 rounded-xl text-sm font-bold">
+                    حاسبة تكلفة المطبخ
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section with Dynamic Background feel -->
-    <section id="hero" class="max-w-[1280px] mx-auto px-6 py-20 md:py-28 grid grid-cols-1 md:grid-cols-12 gap-12 items-center fade-in-up">
-        <div class="md:col-span-7 space-y-6">
-            <div class="inline-flex items-center gap-2 bg-aged-paper border border-warm-taupe px-4 py-1.5 rounded-[9999px] text-xs font-semibold text-terracotta tracking-wider uppercase">
-                <span>+ الورشة الاحترافية ببني ملال</span>
+    <!-- HERO SECTION WITH WHITE MOTION BACKGROUND -->
+    <section id="hero" class="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden bg-white">
+        
+        <!-- Animated Background Motion Canvas Layer -->
+        <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+            <!-- Smooth Motion Background Image with Parallax & Ken Burns Zoom -->
+            <div class="absolute inset-0 opacity-15">
+                <template x-for="(heroImg, index) in heroImages" :key="index">
+                    <img :src="heroImg" 
+                         x-show="currentHeroSlide === index" 
+                         x-transition:enter="transition ease-out duration-1000"
+                         x-transition:enter-start="opacity-0 scale-105"
+                         x-transition:enter-end="opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-1000"
+                         x-transition:leave-start="opacity-100 scale-100"
+                         x-transition:leave-end="opacity-0 scale-95"
+                         class="w-full h-full object-cover motion-bg-img absolute inset-0">
+                </template>
             </div>
-            <h1 class="editorial-title text-4xl md:text-6xl lg:text-7xl leading-[1.1] text-ink">
-                إتقان الصنعة و <span class="italic font-light text-terracotta">فخامة التصميم</span> الخشبي.
-            </h1>
-            <p class="text-charcoal text-base md:text-lg leading-relaxed max-w-xl font-light">
-                نحول مساحتك إلى تحفة معمارية متكاملة بمدينة بني ملال. تفصيل مطابخ عصرية، خزائن ملابس Dressing، وتكسيات حوائط بـ MDF عالي الجودة المقاوم للرطوبة.
-            </p>
-            <div class="flex flex-wrap items-center gap-4 pt-4">
-                <a href="#calculator" class="bg-terracotta text-parchment px-8 py-4 rounded-[40px] text-sm font-semibold hover:opacity-90 transition shadow-sm">
-                    حسب تكلفتك الآن الفورية +
-                </a>
-                <a href="#catalog" class="border-[1.5px] border-terracotta text-terracotta px-8 py-4 rounded-[40px] text-sm font-semibold hover:bg-aged-paper transition">
-                    استكشف عرام التصاميم +
-                </a>
-            </div>
-            <div class="pt-8 grid grid-cols-3 gap-6 border-t border-warm-taupe">
-                <div>
-                    <p class="editorial-title text-3xl font-bold text-ink">100%</p>
-                    <p class="text-xs text-graphite font-medium">مقاوم للرطوبة Hydro</p>
+
+            <!-- Soft Gradient Overlays for Clean Contrast -->
+            <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
+            <div class="absolute top-10 right-10 w-96 h-96 bg-wood-100/50 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-10 left-10 w-96 h-96 bg-luxgold-300/30 rounded-full blur-[120px]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Content -->
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-right">
+                    
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wood-50 border border-wood-200 text-wood-700 text-xs font-bold shadow-sm">
+                        <span class="flex h-2.5 w-2.5 rounded-full bg-wood-600 animate-pulse"></span>
+                        <span>أرقى تصاميم المطابخ والديكور MDF بالمغرب</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight">
+                        <span>فخامة التصميم ودقة التفصيل في</span><br>
+                        <span class="gold-gradient-text">مطابخ وأثاث MDF العصري</span>
+                    </h1>
+
+                    <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                        صمّم مطبخ أحلامك بمواصفات عالمية! نعتمد أجود خشب MDF المقاوم للرطوبة (Hydrofuge) بتشطيبات الأكريليك والـ High Gloss والـ Matt مع ضمان شامل ودقة متناهية في الإنجاز.
+                    </p>
+
+                    <!-- CTA Group -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#estimator" class="w-full sm:w-auto gold-button font-bold px-8 py-4 rounded-xl text-base flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-calculator text-lg"></i>
+                            <span>احسب تكلفة مطبخك بالدرهم</span>
+                        </a>
+                        <a href="https://wa.me/212676586384?text=%D0%A1%D0%BB%D0%B0%D0%BC%D0%BE%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%AD%D9%85%D8%AF%20%D9%85%D9%88%D8%B6%D9%8F%D8%AD%D8%8C%20%D8%A8%D8%BA%D9%8A%D8%AA%20%D9%86%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%84%D9%89%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D9%85%D8%B7%D8%A8%D8%AE" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-800 font-bold px-7 py-4 rounded-xl text-base border border-slate-300 shadow-sm transition-all flex items-center justify-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-emerald-600 text-xl"></i>
+                            <span>حجز قياس واستشارة مجانية</span>
+                        </a>
+                    </div>
+
+                    <!-- Features Bar -->
+                    <div class="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-slate-200">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-wood-100 text-wood-700 flex items-center justify-center text-base">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div class="text-right">
+                                <h4 class="text-xs font-bold text-slate-900">ضمان 5 سنوات</h4>
+                                <p class="text-[10px] text-slate-500">على الهيكل والأكسسوارات</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-wood-100 text-wood-700 flex items-center justify-center text-base">
+                                <i class="fa-solid fa-cube"></i>
+                            </div>
+                            <div class="text-right">
+                                <h4 class="text-xs font-bold text-slate-900">تصميم 3D مجاني</h4>
+                                <p class="text-[10px] text-slate-500">قبل بدء التفصيل</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-wood-100 text-wood-700 flex items-center justify-center text-base">
+                                <i class="fa-solid fa-droplet-slash"></i>
+                            </div>
+                            <div class="text-right">
+                                <h4 class="text-xs font-bold text-slate-900">100% Hydrofuge</h4>
+                                <p class="text-[10px] text-slate-500">مقاوم للمياه والرطوبة</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-wood-100 text-wood-700 flex items-center justify-center text-base">
+                                <i class="fa-solid fa-truck-ramp-box"></i>
+                            </div>
+                            <div class="text-right">
+                                <h4 class="text-xs font-bold text-slate-900">تركيب احترافي</h4>
+                                <p class="text-[10px] text-slate-500">تسليم في الموعد</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div>
-                    <p class="editorial-title text-3xl font-bold text-ink">+500</p>
-                    <p class="text-xs text-graphite font-medium">مشروع منجز بنجاح</p>
+
+                <!-- Hero Visual Floating Motion Cards -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        
+                        <!-- Main Showcase Hero Card -->
+                        <div class="white-glass-card p-3 rounded-3xl shadow-2xl relative z-10 overflow-hidden">
+                            <div class="relative h-[430px] rounded-2xl overflow-hidden">
+                                <img :src="heroImages[currentHeroSlide]" 
+                                     alt="مطابخ MDF عصرية" 
+                                     class="w-full h-full object-cover transition-all duration-700">
+                                
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+                                
+                                <!-- Floating Interactive Tag -->
+                                <div class="absolute bottom-4 right-4 left-4 bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-lg border border-slate-200 flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900">MDF Hydrofuge + Quartz Top</p>
+                                        <p class="text-[10px] text-wood-600 font-semibold">تشطيب أكريليك مائي هيدروليك</p>
+                                    </div>
+                                    <span class="bg-emerald-100 text-emerald-800 text-[10px] px-2.5 py-1 rounded-full font-extrabold">
+                                        تسليم حديث
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Animated Floating Card Accent 1 -->
+                        <div class="absolute -top-6 -left-6 z-20 animate-float hidden sm:block">
+                            <div class="bg-white p-3.5 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-luxgold-400/20 text-luxgold-600 flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-star text-lg"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-black text-slate-900">+250 مطبخ</p>
+                                    <p class="text-[10px] text-slate-500">تم إنجازه بنجاح</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Animated Floating Card Accent 2 -->
+                        <div class="absolute -bottom-6 -right-6 z-20 animate-float hidden sm:block" style="animation-delay: 2.5s;">
+                            <div class="bg-white p-3.5 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-wood-100 text-wood-700 flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-certificate text-lg"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-black text-slate-900">جودة أوروبية</p>
+                                    <p class="text-[10px] text-slate-500">آليات Blum Soft-Close</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div>
-                    <p class="editorial-title text-3xl font-bold text-ink">بني ملال</p>
-                    <p class="text-xs text-graphite font-medium">الخدمة والتركيب المحلي</p>
-                </div>
+
             </div>
         </div>
-        <div class="md:col-span-5">
-            <div class="bg-aged-paper p-5 rounded-[24px] shadow-2xl border border-warm-taupe zoom-hover">
-                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=900&q=80" alt="مطبخ MDF فخم" class="w-full h-[420px] object-cover rounded-[16px]">
-                <div class="mt-4 px-2 flex justify-between items-center">
-                    <div>
-                        <p class="text-xs font-semibold text-terracotta uppercase">تصميم مرجعي فاخر</p>
-                        <p class="editorial-title text-xl text-ink">مطابخ L-Shape عصرية</p>
+    </section>
+
+    <!-- BEFORE & AFTER SLIDER SECTION -->
+    <section id="before-after" class="py-20 bg-slate-50 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-wood-600 text-xs font-extrabold tracking-widest uppercase">التحول المذهل</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-1">شاهد الفرق قبل وبعد تجديد المطبخ</h2>
+                <p class="text-slate-600 text-sm mt-2">حرّك السلايدر التفاعلي لتكتشف كيف نحول المساحات القديمة إلى مطابخ MDF عصرية وفاخرة</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="relative w-full h-[400px] sm:h-[500px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white select-none cursor-ew-resize"
+                     x-ref="sliderContainer"
+                     @mousemove="moveSlider($event)"
+                     @touchmove="moveSlider($event)">
+                    
+                    <!-- After Image (Full Background) -->
+                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80" 
+                         alt="مطبخ بعد التجديد MDF" 
+                         class="absolute inset-0 w-full h-full object-cover">
+                    <span class="absolute top-4 left-4 bg-emerald-600 text-white text-xs font-black px-3 py-1.5 rounded-xl shadow-md z-10">
+                        بعد التجديد (MDF Hydrofuge)
+                    </span>
+
+                    <!-- Before Image (Clipped Overlay) -->
+                    <div class="absolute inset-0 w-full h-full overflow-hidden" :style="'width: ' + sliderPos + '%'">
+                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80" 
+                             alt="مطبخ قبل التجديد" 
+                             class="absolute inset-0 w-full h-full object-cover max-w-none"
+                             :style="'width: ' + $refs.sliderContainer?.clientWidth + 'px'">
+                        <span class="absolute top-4 right-4 bg-slate-900/80 text-white text-xs font-black px-3 py-1.5 rounded-xl shadow-md z-10">
+                            قبل التجديد
+                        </span>
                     </div>
-                    <span class="text-xs font-mono text-graphpx text-graphite">Atlas Series</span>
+
+                    <!-- Slider Divider Handle -->
+                    <div class="absolute top-0 bottom-0 w-1 bg-white shadow-2xl z-20" :style="'left: ' + sliderPos + '%'">
+                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-wood-600 text-white flex items-center justify-center shadow-2xl border-2 border-white text-sm">
+                            <i class="fa-solid fa-arrows-left-right"></i>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Massive Catalog / Gallery Section ("عرام" ديال التصاور والموديلات الفخمة) -->
-    <section id="catalog" class="bg-aged-paper py-24 px-6 my-12 border-y border-warm-taupe">
-        <div class="max-w-[1280px] mx-auto">
-            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <span class="text-xs font-semibold text-terracotta tracking-widest uppercase">كتالوج الأعمال الشامل</span>
-                <h2 class="editorial-title text-3xl md:text-5xl text-ink">عرام من التصاميم والديكورات الـ MDF الفاخرة</h2>
-                <p class="text-charcoal text-sm font-light">تخترنا لكم تشكيلة واسعة من أحدث الابتكارات العالمية لتلائم تطلعاتكم في بني ملال.</p>
+    <!-- INTERACTIVE BUDGET CALCULATOR SECTION -->
+    <section id="estimator" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-wood-600 text-xs font-extrabold tracking-widest uppercase">حاسبة التكلفة الذكية</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-1">احسب تقدير تكلفة مطبخك بالدرهم المغربي (MAD)</h2>
+                <p class="text-slate-600 text-sm mt-2">قم باختيار نوع MDF، التخطيط، القياسات بالمتر الطولي، ونوع الرخام للحصول على سعر تقديري مباشر</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Item 1 -->
-                <div class="bg-parchment p-6 rounded-[24px] border border-warm-taupe shadow-sm flex flex-col justify-between zoom-hover">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Calculator Options -->
+                <div class="lg:col-span-8 white-glass-card p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-8 shadow-lg">
+                    
+                    <!-- 1. Layout Selection -->
                     <div>
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="مطبخ" class="w-full h-64 object-cover rounded-[16px] mb-4">
-                        <span class="text-[11px] font-mono text-terracotta uppercase">فئة 01 · مطابخ Laqué عصرية</span>
-                        <h3 class="editorial-title text-2xl text-ink mt-1 mb-2">مطابخ مدمجة بلمسات لامعة</h3>
-                        <p class="text-sm text-charcoal font-light leading-relaxed">مقاومة للحرارة والبخار، مع أنظمة إغلاق ناعم (Soft-Close) وإنارة LED مخفية.</p>
+                        <label class="block text-sm font-extrabold text-slate-900 mb-3">1. شكل المطبخ والتصميم (Layout):</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <template x-for="shape in shapes" :key="shape.id">
+                                <button @click="selectedShape = shape.id"
+                                        :class="selectedShape === shape.id ? 'border-wood-600 bg-wood-50 text-wood-700 shadow-sm' : 'border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300'"
+                                        class="p-4 rounded-2xl border text-center transition-all flex flex-col items-center gap-2">
+                                    <i :class="shape.icon" class="text-2xl text-wood-600"></i>
+                                    <span class="text-xs font-bold" x-text="shape.name"></span>
+                                </button>
+                            </template>
+                        </div>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-warm-taupe flex justify-between items-center text-xs font-semibold">
-                        <span class="
+
+                    <!-- 2. MDF Material Selection -->
+                    <div>
+                        <label class="block text-sm font-extrabold text-slate-900 mb-3">2. خامة الخشب والتشطيب (MDF Finish):</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <template x-for="finish in finishes" :key="finish.id">
+                                <div @click="selectedFinish = finish.id"
+                                     :class="selectedFinish === finish.id ? 'border-wood-600 bg-wood-50/80 text-slate-900' : 'border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300'"
+                                     class="p-4 rounded-2xl border cursor-pointer transition-all flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-wood-100 text-wood-700">
+                                            <i class="fa-solid fa-layer-group"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-xs font-bold text-slate-900" x-text="finish.name"></h4>
+                                            <p class="text-[10px] text-slate-500" x-text="finish.desc"></p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-extrabold text-wood-700" x-text="finish.pricePerMeter + ' د.م/متر'"></span>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- 3. Length Slider -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-sm font-extrabold text-slate-900">3. الطول الإجمالي للمطبخ (بالمتر الطولي):</label>
+                            <span class="text-lg font-black text-wood-700 bg-wood-100 px-4 py-1 rounded-xl border border-wood-200" x-text="meters + ' متر'"></span>
+                        </div>
+                        <input type="range" min="3" max="15" step="0.5" x-model="meters" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-wood-600">
+                        <div class="flex justify-between text-[10px] text-slate-400 font-bold mt-1">
+                            <span>3 أمتار (مطبخ صغير)</span>
+                            <span>8 أمتار (متوسط)</span>
+                            <span>15 متر (كبير جداً)</span>
+                        </div>
+                    </div>
+
+                    <!-- 4. Countertop Selection -->
+                    <div>
+                        <label class="block text-sm font-extrabold text-slate-900 mb-3">4. نوع سطح العمل والرخام:</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <template x-for="top in countertops" :key="top.id">
+                                <button @click="selectedTop = top.id"
+                                        :class="selectedTop === top.id ? 'border-wood-600 bg-wood-50 text-wood-700' : 'border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300'"
+                                        class="p-3.5 rounded-2xl border text-center transition-all">
+                                    <p class="text-xs font-bold" x-text="top.name"></p>
+                                    <p class="text-[10px] text-wood-600 font-extrabold mt-1" x-text="top.pricePerMeter + ' د.م/متر'"></p>
+                                </button>
+                            </template>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Price Summary Card -->
+                <div class="lg:col-span-4 white-glass-card p-6 sm:p-8 rounded-3xl border border-wood-200 sticky top-28 space-y-6 shadow-xl">
+                    <h3 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-receipt text-wood-600"></i>
+                        <span>ملخص تقدير السعر</span>
+                    </h3>
+
+                    <div class="space-y-3 text-xs font-semibold">
+                        <div class="flex justify-between text-slate-600">
+                            <span>شكل المطبخ:</span>
+                            <span class="font-bold text-slate-900" x-text="getShapeName()"></span>
+                        </div>
+                        <div class="flex justify-between text-slate-600">
+                            <span>خامة MDF:</span>
+                            <span class="font-bold text-slate-900" x-text="getFinishName()"></span>
+                        </div>
+                        <div class="flex justify-between text-slate-600">
+                            <span>المسافة الإجمالية:</span>
+                            <span class="font-bold text-slate-900" x-text="meters + ' متر'"></span>
+                        </div>
+                        <div class="flex justify-between text-slate-600">
+                            <span>الرخام المطابق:</span>
+                            <span class="font-bold text-slate-900" x-text="getTopName()"></span>
+                        </div>
+                        <div class="flex justify-between text-slate-600">
+                            <span>المفصلات الهيدروليكية:</span>
+                            <span class="font-extrabold text-emerald-600">مدرجة مجاناً</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-200">
+                        <span class="text-xs text-slate-500 font-bold block mb-1">السعر الإجمالي التقديري:</span>
+                        <div class="text-3xl font-black text-wood-700">
+                            <span x-text="calculateTotal().toLocaleString()"></span> <span class="text-sm font-bold text-slate-800">درهم</span>
+                        </div>
+                        <p class="text-[10px] text-slate-400 mt-2">* يشمل التقييم التصميم 3D، النقل والتركيب النهائي.</p>
+                    </div>
+
+                    <div>
+                        <a :href="'https://wa.me/212676586384?text=' + encodeURIComponent('سلام عليكم الأخ أحمد مواضح، قمت بحساب تكلفة مطبخ MDF:\n- الشكل: ' + getShapeName() + '\n- الخامة: ' + getFinishName() + '\n- القياس: ' + meters + ' متر\n- الرخام: ' + getTopName() + '\n- التكلفة التقديرية: ' + calculateTotal().toLocaleString() + ' درهم.\nأرغب في حجز قياس مجاني.')" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="w-full gold-button font-bold py-3.5 px-4 rounded-xl text-center text-xs flex items-center justify-center gap-2 shadow-lg">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>تأكيد الميزانية وحجز معاينة مجانية</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY PORTFOLIO WITH MOTION HOVER EFFECTS -->
+    <section id="portfolio" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-wood-600 text-xs font-extrabold tracking-widest uppercase">معرض المشاريع</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-1">أعمالنا المنفذة في المطابخ والديكورات</h2>
+                </div>
+
+                <!-- Filters -->
+                <div class="flex flex-wrap gap-2 mt-6 md:mt-0">
+                    <button @click="portfolioCategory = 'all'" 
+                            :class="portfolioCategory === 'all' ? 'gold-button' : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'"
+                            class="px-4 py-2 rounded-xl text-xs font-bold transition-all">الكل</button>
+                    <button @click="portfolioCategory = 'kitchens'" 
+                            :class="portfolioCategory === 'kitchens' ? 'gold-button' : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'"
+                            class="px-4 py-2 rounded-xl text-xs font-bold transition-all">مطابخ عصريّة</button>
+                    <button @click="portfolioCategory = 'closets'" 
+                            :class="portfolioCategory === 'closets' ? 'gold-button' : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'"
+                            class="px-4 py-2 rounded-xl text-xs font-bold transition-all">بلاكارات ودريسنج</button>
+                    <button @click="portfolioCategory = 'tv'" 
+                            :class="portfolioCategory === 'tv' ? 'gold-button' : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'"
+                            class="px-4 py-2 rounded-xl text-xs font-bold transition-all">ديكورات TV والصالون</button>
+                </div>
+            </div>
+
+            <!-- Portfolio Motion Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <template x-for="item in filteredPortfolio()" :key="item.id">
+                    <div class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-md group hover:shadow-2xl hover:border-wood-300 transition-all duration-500 flex flex-col">
+                        <div class="relative overflow-hidden h-64">
+                            <img :src="item.image" :alt="item.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-wood-700 text-[10px] px-3 py-1 rounded-full font-bold shadow-sm" x-text="item.tag"></span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-base font-extrabold text-slate-900 group-hover:text-wood-600 transition-colors" x-text="item.title"></h3>
+                                <p class="text-xs text-slate-500 mt-2 leading-relaxed" x-text="item.desc"></p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-wood-700">
+                                <span class="flex items-center gap-1.5 font-bold">
+                                    <i class="fa-solid fa-location-dot text-wood-600"></i>
+                                    <span x-text="item.city"></span>
+                                </span>
+                                <button @click="openModal(item)" class="text-slate-900 hover:text-wood-600 font-extrabold underline">عرض الصور</button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MDF MATERIALS EXPLANATION SECTION -->
+    <section id="materials" class="py-20 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-wood-600 text-xs font-extrabold tracking-widest uppercase">دليل الجودة</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-1">لماذا خشب MDF Hydrofuge هو الأفضل للمطابخ؟</h2>
+                <p class="text-slate-600 text-sm mt-2">تعرّف على مزايا الخشب المعالج بالتكنولوجيا الحديثة والمفصلات الذكية</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 hover:border-wood-300 transition-all shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-wood-100 text-wood-700 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-droplet-slash"></i>
+                    </div>
+                    <h3 class="text-base font-extrabold text-slate-900 mb-2">MDF الأخضر (Hydrofuge)</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        خشب معالج صُمم خصيصاً ليقاوم الرطوبة والماء والحرارة العالية، مما يمنع الانتفاخ أو التلف تماماً في المطابخ.
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 hover:border-wood-300 transition-all shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-wood-100 text-wood-700 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-gem"></i>
+                    </div>
+                    <h3 class="text-base font-extrabold text-slate-900 mb-2">High Gloss & Acrylic</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        طبقات أكريليك فاخرة تمنح مطبخك بريقاً زجاجياً أو لمسة مخملية (Soft Touch) مضادة للبصمات والخدوش.
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 hover:border-wood-300 transition-all shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-wood-100 text-wood-700 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <h3 class="text-base font-extrabold text-slate-900 mb-2">شريط Chant PVC حراري</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        تثبيت حواف الواجهات بشرائط PVC بسمك 2مم باستخدام آلات حرارية أوتوماتيكية لإغلاق تام يمنع تسرب المياه.
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 hover:border-wood-300 transition-all shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-wood-100 text-wood-700 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <h3 class="text-base font-extrabold text-slate-900 mb-2">آليات Blum الهيدروليكية</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        مفصلات وسكك إغلاق سلسة وبطيئة (Soft-Close) تتحمل أوزاناً ثقيلة وتدوم لسنوات طوال بدون إزعاج.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & MEASUREMENT BOOKING FORM SECTION -->
+    <section id="contact" class="py-24 bg-slate-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Contact Details -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-wood-600 text-xs font-extrabold tracking-widest uppercase">تواصل معنا</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">حجز موعد لأخذ القياسات المعمارية</h2>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        اطلب زيارة فريقنا الفني لمنزلك لأخذ المقاسات بدقة واختيار نماذج الخشب والرخام مباشرة مع مهندس الديكور.
+                    </p>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                            <div class="w-11 h-11 rounded-xl bg-wood-100 text-wood-700 flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-slate-400 font-bold">إدارة المشروع والورشة</h4>
+                                <p class="text-sm font-extrabold text-slate-900">أحمد مواضح (Ahmed Mowadah)</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                            <div class="w-11 h-11 rounded-xl bg-wood-100 text-wood-700 flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-slate-400 font-bold">الهاتف والواتساب المباشر</h4>
+                                <a href="tel:+212676586384" class="text-sm font-extrabold text-slate-900 hover:text-wood-600" dir="ltr">+212 676-586384</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                            <div class="w-11 h-11 rounded-xl bg-wood-100 text-wood-700 flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-slate-400 font-bold">البريد الإلكتروني الرسمى</h4>
+                                <a href="mailto:Ahmedmodah98@gmail.com" class="text-sm font-extrabold text-slate-900 hover:text-wood-600">Ahmedmodah98@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                            <div class="w-11 h-11 rounded-xl bg-wood-100 text-wood-700 flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-slate-400 font-bold">المقر والمعرض الرئيسي</h4>
+                                <p class="text-sm font-extrabold text-slate-900">حي الأطلس، بني ملال / المغرب</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-xl">
+                    <h3 class="text-xl font-extrabold text-slate-900 mb-6">احجز استشارة ومعاينة مجانية مع أحمد مواضح</h3>
+                    <form @submit.prevent="submitForm" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-2">الاسم الكامل:</label>
+                                <input type="text" x-model="form.name" required placeholder="مثال: كريم العلمي" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-900 focus:outline-none focus:border-wood-600 transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-2">رقم الهاتف:</label>
+                                <input type="tel" x-model="form.phone" required placeholder="0676586384" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-900 focus:outline-none focus:border-wood-600 transition-colors">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-2">المدينة / الحي:</label>
+                                <input type="text" x-model="form.city" required placeholder="مثال: بني ملال (حي الأطلس)، أزيلال..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-900 focus:outline-none focus:border-wood-600 transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-2">نوع المشروع المطلوب:</label>
+                                <select x-model="form.projectType" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-900 focus:outline-none focus:border-wood-600 transition-colors">
+                                    <option value="مطبخ كامل">مطبخ عصري كامل</option>
+                                    <option value="بلاكار / دريسنج">بلاكار / دريسنج</option>
+                                    <option value="ديكور TV / صالون">ديكور جداري TV</option>
+                                    <option value="تأثيث شقة بالكامل">تأثيث كامل لشقة</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-2">تفاصيل إضافية (اختياري):</label>
+                            <textarea x-model="form.notes" rows="4" placeholder="اكتب أي ملاحظات بخصوص القياسات أو الألوان المفضلة..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs text-slate-900 focus:outline-none focus:border-wood-600 transition-colors"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full gold-button font-bold py-4 rounded-xl text-sm shadow-lg flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>إرسال الطلب مباشرة للواتساب</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECT MODAL POPUP -->
+    <div x-show="modalOpen" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <div @click.away="modalOpen = false" class="bg-white rounded-3xl max-w-2xl w-full p-6 relative border border-slate-200 shadow-2xl">
+            <button @click="modalOpen = false" type="button" aria-label="Close modal" class="absolute top-4 left-4 text-slate-400 hover:text-slate-900 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <template x-if="activeItem">
+                <div>
+                    <img :src="activeItem.image" :alt="activeItem.title" class="w-full h-80 object-cover rounded-2xl mb-4">
+                    <span class="bg-wood-100 text-wood-700 text-xs px-3 py-1 rounded-full font-bold" x-text="activeItem.tag"></span>
+                    <h3 class="text-xl font-black text-slate-900 mt-3" x-text="activeItem.title"></h3>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed" x-text="activeItem.desc"></p>
+                    
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs text-slate-500 font-bold" x-text="'المدينة: ' + activeItem.city"></span>
+                        <a :href="'https://wa.me/212676586384?text=' + encodeURIComponent('سلام عليكم الأخ أحمد مواضح، أعجبني تصميم: ' + activeItem.title + '. أرغب في الحصول على معلومات وموعد معاينة.')" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="gold-button px-5 py-2.5 rounded-xl text-xs font-bold">
+                            طلب تصميم مماثل
+                        </a>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-12 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-wood-600 flex items-center justify-center text-white font-bold">
+                        <i class="fa-solid fa-couch"></i>
+                    </div>
+                    <span class="text-slate-900 font-extrabold text-sm">إتقان MDF | إدارة أحمد مواضح (Ahmed Mowadah)</span>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6 font-bold text-slate-600">
+                    <a href="#hero" class="hover:text-wood-600">الرئيسية</a>
+                    <a href="#estimator" class="hover:text-wood-600">حاسبة التكلفة</a>
+                    <a href="#portfolio" class="hover:text-wood-600">الأعمال</a>
+                    <a href="#contact" class="hover:text-wood-600">التواصل</a>
+                </div>
+
+                <p>© 2026 جميع الحقوق محفوظة لـ أحمد مواضح (Ahmed Mowadah) - بني ملال (حي الأطلس).</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ALPINE.JS APPLICATION LOGIC -->
+    <script>
+        function mdfApp() {
+            return {
+                mobileMenuOpen: false,
+                modalOpen: false,
+                activeItem: null,
+                sliderPos: 50,
+
+                // Hero Motion Image Gallery Carousel
+                currentHeroSlide: 0,
+                heroImages: [
+                    'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1600&q=80',
+                    'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=1600&q=80',
+                    'https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=1600&q=80'
+                ],
+
+                // Before/After Slider Interaction
+                moveSlider(e) {
+                    if (!this.$refs.sliderContainer) return;
+                    const rect = this.$refs.sliderContainer.getBoundingClientRect();
+                    const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+                    const x = clientX - rect.left;
+                    let percentage = (x / rect.width) * 100;
+                    if (percentage < 0) percentage = 0;
+                    if (percentage > 100) percentage = 100;
+                    this.sliderPos = percentage;
+                },
+
+                // Calculator State
+                meters: 5,
+                selectedShape: 'l-shape',
+                selectedFinish: 'hydro-gloss',
+                selectedTop: 'quartz',
+
+                shapes: [
+                    { id: 'straight', name: 'خط مستقيم', icon: 'fa-solid fa-ruler-horizontal', factor: 1.0 },
+                    { id: 'l-shape', name: 'شكل L', icon: 'fa-solid fa-chart-line', factor: 1.05 },
+                    { id: 'u-shape', name: 'شكل U', icon: 'fa-solid fa-arrows-split-up-and-left', factor: 1.1 },
+                    { id: 'island', name: 'مع جزيرة وسطية', icon: 'fa-solid fa-border-all', factor: 1.25 }
+                ],
+
+                finishes: [
+                    { id: 'hydro-gloss', name: 'MDF Hydrofuge High Gloss', desc: 'مقاوم للماء أكريليك لمعان زجاجي', pricePerMeter: 2200 },
+                    { id: 'hydro-matt', name: 'MDF Hydrofuge Matt (Soft Touch)', desc: 'مقاوم للماء لمسة مخملية مضاد للبصمات', pricePerMeter: 2400 },
+                    { id: 'wood-veneer', name: 'MDF قشرة خشب طبيعي (Placage)', desc: 'قشرة خشب الجوز أو الشين الفاخر', pricePerMeter: 2800 },
+                    { id: 'laminate', name: 'MDF Laminé ستاندرد', desc: 'مقاوم للخدوش اقتصادي وأنيق', pricePerMeter: 1800 }
+                ],
+
+                countertops: [
+                    { id: 'none', name: 'بدون رخام', pricePerMeter: 0 },
+                    { id: 'mdf-top', name: 'سطح MDF معالج', pricePerMeter: 400 },
+                    { id: 'granite', name: 'رخام غرانيت طبيعي', pricePerMeter: 1200 },
+                    { id: 'quartz', name: 'كوارتز معالج (Quartz)', pricePerMeter: 1900 }
+                ],
+
+                // Portfolio Data
+                portfolioCategory: 'all',
+                portfolioItems: [
+                    {
+                        id: 1,
+                        category: 'kitchens',
+                        tag: 'MDF Hydrofuge',
+                        title: 'مطبخ مودرن أبيض وأكوا مع جزيرة وسطية',
+                        desc: 'تصميم عالي الجودة بطلاء أكريليك مقاوم للماء وأبواب هيدروليكية.',
+                        city: 'أزيلال',
+                        image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80'
+                    },
+                    {
+                        id: 2,
+                        category: 'kitchens',
+                        tag: 'High Gloss',
+                        title: 'مطبخ أكريليك رمادي مات ورخام كوارتز',
+                        desc: 'تقسيمات ذكية للأدراج والسلال الإيطالية مع إنارة LED مخفية.',
+                        city: 'بني ملال',
+                        image: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80'
+                    },
+                    {
+                        id: 3,
+                        category: 'closets',
+                        tag: 'دريسنج روم',
+                        title: 'بلاكار خزانة ملابس مدمجة بمرايا',
+                        desc: 'تفصيل حسب الطلب بريع خشب MDF قشرة شين ومقابض مخفية.',
+                        city: 'الدار البيضاء',
+                        image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80'
+                    },
+                    {
+                        id: 4,
+                        category: 'tv',
+                        tag: 'ديكور صالون',
+                        title: 'جدارية تلفاز MDF خشبية مع بديل الرخام',
+                        desc: 'لمسة ديكور عصرية للصالون المغربي بخلفيات مضيئة وأرفف أنيقة.',
+                        city: 'مراكش',
+                        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'
+                    },
+                    {
+                        id: 5,
+                        category: 'kitchens',
+                        tag: 'مطبخ صغير',
+                        title: 'مطبخ مودرن لشقة باللون الخشبي والأسود',
+                        desc: 'استغلال الزوايا والمساحات الضيقة بأفضل شكل عملي.',
+                        city: 'أزيلال',
+                        image: 'https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=800&q=80'
+                    },
+                    {
+                        id: 6,
+                        category: 'closets',
+                        tag: 'خزانة ملابس',
+                        title: 'خزانة أبواب سحّابة هيدروليك',
+                        desc: 'أبواب انزلاقية خفيفة مع حواشي PVC وحفظ تام للغبار.',
+                        city: 'بني ملال',
+                        image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=800&q=80'
+                    }
+                ],
+
+                // Form Data
+                form: {
+                    name: '',
+                    phone: '',
+                    city: '',
+                    projectType: 'مطبخ كامل',
+                    notes: ''
+                },
+
+                init() {
+                    // Safe autoplay loop without promise rejections
+                    setInterval(() => {
+                        this.currentHeroSlide = (this.currentHeroSlide + 1) % this.heroImages.length;
+                    }, 6000);
+                },
+
+                // Calculator Helpers
+                getShapeName() {
+                    const s = this.shapes.find(item => item.id === this.selectedShape);
+                    return s ? s.name : '';
+                },
+                getFinishName() {
+                    const f = this.finishes.find(item => item.id === this.selectedFinish);
+                    return f ? f.name : '';
+                },
+                getTopName() {
+                    const t = this.countertops.find(item => item.id === this.selectedTop);
+                    return t ? t.name : '';
+                },
+                calculateTotal() {
+                    const finishObj = this.finishes.find(f => f.id === this.selectedFinish);
+                    const topObj = this.countertops.find(t => t.id === this.selectedTop);
+                    const shapeObj = this.shapes.find(s => s.id === this.selectedShape);
+
+                    const finishPrice = finishObj ? finishObj.pricePerMeter : 0;
+                    const topPrice = topObj ? topObj.pricePerMeter : 0;
+                    const factor = shapeObj ? shapeObj.factor : 1;
+
+                    const baseCost = (finishPrice + topPrice) * this.meters;
+                    return Math.round(baseCost * factor);
+                },
+
+                filteredPortfolio() {
+                    if (this.portfolioCategory === 'all') return this.portfolioItems;
+                    return this.portfolioItems.filter(item => item.category === this.portfolioCategory);
+                },
+
+                openModal(item) {
+                    this.activeItem = item;
+                    this.modalOpen = true;
+                },
+
+                submitForm() {
+                    const text = `السلام عليكم الأخ أحمد مواضح، أرغب في طلب استشارة وحجز قياس مجاني:\n- الاسم: ${this.form.name}\n- الهاتف: ${this.form.phone}\n- المدينة: ${this.form.city}\n- نوع المشروع: ${this.form.projectType}\n- ملاحظات: ${this.form.notes}`;
+                    const whatsappUrl = `https://wa.me/212676586384?text=${encodeURIComponent(text)}`;
+                    window.open(whatsappUrl, '_blank');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
